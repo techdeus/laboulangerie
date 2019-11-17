@@ -1,0 +1,17 @@
+{
+  "name": "laboulangerie",
+  "version": "1.0.0",
+  "description": "This is a web application to manage, track and update inventory for LaBoulangerie Cafe!",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js --watch"
+  },
+  "author": "Marlon Sullivan & Ghazaleh Shameli",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
