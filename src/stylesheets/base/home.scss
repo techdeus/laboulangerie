@@ -1,0 +1,16 @@
+@import 'src/stylesheets/base/master.scss';
+
+.homeWrapper
+{
+    max-height: 100vh;
+    background: #ffffff;
+}
+
+.productsWrapper
+{
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 1em;
+    justify-content: center;
+}

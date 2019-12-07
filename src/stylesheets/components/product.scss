@@ -1,0 +1,41 @@
+@import 'src/stylesheets/base/master.scss';
+
+.productWrapper
+{
+    display: flex;
+    flex-direction: column;
+    background: $primaryoffcolor;
+    border: none;
+    border-radius: 3px;
+    margin: 25px;
+    width: auto;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.productName
+{
+    // padding-top: 10px;
+    font-size: 16px;
+    color: $texttitlecolor;
+    // padding: 10px;
+}
+
+.productPrice
+{
+    font-size: 12px;
+    color: $secondarycolor;
+    // padding: 10px;
+}
+
+.addIcon
+{
+    cursor: pointer;
+    margin: 10px 0;
+    &:hover {
+        background: #ffffff44;
+        border-radius: 3px;
+    }
+}
