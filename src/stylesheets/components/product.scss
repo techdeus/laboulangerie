@@ -4,38 +4,91 @@
 {
     display: flex;
     flex-direction: column;
-    background: $primaryoffcolor;
+    background: #1e55eb4d;
     border: none;
     border-radius: 3px;
     margin: 25px;
     width: auto;
-    height: 100px;
+    height: 200px;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .productName
 {
     // padding-top: 10px;
-    font-size: 16px;
+    font-size: 28px;
     color: $texttitlecolor;
-    // padding: 10px;
+    padding: 10px;
+    text-align: center; 
 }
 
 .productPrice
 {
-    font-size: 12px;
+    font-size: 18px;
     color: $secondarycolor;
-    // padding: 10px;
+    padding: 10px;
+}
+
+.productCategory
+{
+    color: #000;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 10px;
 }
 
 .addIcon
 {
     cursor: pointer;
-    margin: 10px 0;
+    margin: 10px!important;
+    // align-self: flex-end;   
+}
+
+.cartIcon
+{
+    cursor: pointer!important;
+    margin: 10px!important;
+    top: 10px!important;
     &:hover {
-        background: #ffffff44;
-        border-radius: 3px;
+        color: rgb(15, 92, 15)!important;
     }
+}
+
+.quantityIcon
+{
+    width: 45%!important;
+}
+
+.deleteIcon
+{
+    top: 10px!important;
+}
+
+.topHalf
+{
+    display: flex;
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bottomHalf
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.inCart
+{
+    background: lightgreen;
 }

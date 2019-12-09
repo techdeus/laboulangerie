@@ -4,18 +4,21 @@ import Axios from 'axios';
 import '../stylesheets/base/master.scss';
 import '../stylesheets/components/login.scss';
 import { Redirect } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
 
 function Login() {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ message, setMessage ] = useState('');
     const [ error, setError ] = useState('');
-    const [ appInfo, setAppInfo ] = useContext(InfoContext);
-
+    const { appInfo } = useContext(InfoContext);
+    const { cart } = useContext(InfoContext);
+    const [ loading, setLoading ] = useState(false);
+    
     if (window.localStorage.getItem('data')) {
         return <Redirect to='/home' />
     }
-    
+
     const handleChange = (e) => {
         if (e.target.name === 'username') {
             setUsername(e.target.value);
@@ -26,17 +29,20 @@ function Login() {
 
     const handleSubmit = async () => {
         try {
+            setLoading(true);
             const result = await Axios.post('/login/user', {
-                username,
+                username: username.toLowerCase(),
                 password,
             })
             if (error) {
                 setError('');
             }
-            setAppInfo(result.data);
+            appInfo[1](result.data);
             window.localStorage.setItem('data', JSON.stringify(result.data));
+            setLoading(false);
             setMessage(result.data.message);
         } catch (err) {
+            if (loading) setLoading(false);
             setError(err.response.data.message);
         }
     };
@@ -67,7 +73,10 @@ function Login() {
                     className="inputBoxes"
                 >
                 </input>
-                <button className="loginButton" onClick={handleSubmit}>Login</button>
+                <button className="loginButton" onClick=            {handleSubmit}
+                >
+                 {loading ? <CircularProgress size="small" /> : null}   Login
+                </button>
                 {
                     message ? <div className="message">{message}</div> : null
                 }

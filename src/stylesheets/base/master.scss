@@ -4,6 +4,12 @@ $secondarycolor: #ff822B;
 $backgroundcolor: #e2e1e0;
 $texttitlecolor: #766d65;
 
+$breakpoints: (
+    medium: 43.75em,
+    large: 62.5em,
+    xlarge: 87.5em,
+);
+
 *
 {
     box-sizing: border-box;
@@ -30,4 +36,20 @@ $texttitlecolor: #766d65;
     margin: 100px 0;
     color: $primarycolor;
     text-align: center;
+}
+
+.error
+{
+    color: tomato;
+    font-size: 14px;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+@mixin breakpoint($size) {
+    $breakpoint-value: map-get($breakpoints, $size);
+
+    @media screen and (min-width: $breakpoint-value) {
+        @content;
+    }
 }

@@ -10,8 +10,8 @@ function Home() {
     const [ products, setProducts ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState('');
-    const [ appInfo, setAppInfo ] = useContext(InfoContext);
-    const [ cart, setCart ] = useContext(InfoContext);
+    const { appInfo } = useContext(InfoContext);
+    const { cart } = useContext(InfoContext);
 
     
     if (window.localStorage.getItem('data') == null) {
@@ -48,7 +48,7 @@ function Home() {
                 {
                     products.length > 0 ? 
                             products.map((product) => (
-                                <Product key={product.id} product={product} cart={cart} setCart={setCart} />
+                                <Product key={product.id} product={product} cart={cart[0]} setCart={cart[1]} />
                             ))
                     : null
                 }

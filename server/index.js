@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8282;
 const { userModel, storeModel, productModel } = require('./database/models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ngrok = require('ngrok');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -87,6 +88,12 @@ app.get('/*', (req, res) => {
     });
 });
 
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 });
+
+(async function() {
+    const url = await ngrok.connect(8282);
+    console.log('URL: ', url);
+})();
