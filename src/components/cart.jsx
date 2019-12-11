@@ -69,7 +69,7 @@ function Cart({ showCart, setShowCart }) {
                 <div className="cartHeaderWrapper flexEnd">
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon /> </IconButton>
                 </div>
-                <Confirmation msg={msg} />
+                <Confirmation setOrder={setOrder} setShowCart={setShowCart} msg={msg} />
             </div>
         )
     }
@@ -81,7 +81,8 @@ function Cart({ showCart, setShowCart }) {
                     <div className="cartTitle">{store || appInfo.store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon /> </IconButton>
                 </div>
-                <div className="emptyCart">The Shopping Cart is Empty</div>
+                <div className="emptyCart">Empty Cart</div>
+                <img className="emptyCartPic" src="/img/assets/empty_cart.png" alt="Empty Shopping Cart" />
             </div>
         )
     }

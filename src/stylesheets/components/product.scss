@@ -4,7 +4,7 @@
 {
     @include vendor-prefix(display, flex);
     flex-direction: column;
-    background: #1e55eb4d;
+    background: $productcolor;
     border: none;
     border-radius: 3px;
     margin: 25px;

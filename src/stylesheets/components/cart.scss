@@ -22,11 +22,19 @@
 {
     width: 50%;
 }
+
 .emptyCart
 {
+    margin-top: 75px;
     font-size: 48px;
     text-transform: uppercase;
-    padding: 100px;
+    padding: 25px;
+}
+
+.emptyCartPic
+{
+    width: 300px;
+    height: auto;
 }
 
 .cartHeaderWrapper

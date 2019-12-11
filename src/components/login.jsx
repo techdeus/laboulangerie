@@ -47,8 +47,6 @@ function Login() {
         }
     };
 
-    
-
     return (
         <div className="wrapper">
             <img className="loginSplashPic" src="/img/assets/cafe_logo_big.jpg" alt="Logo"/>
