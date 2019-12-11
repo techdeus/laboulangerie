@@ -4,7 +4,7 @@
   "description": "This is a web application to manage, track and update inventory for LaBoulangerie Cafe!",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cp example.env && echo 'Add Variables into .env file!'",
+    "postinstall": "cp example.env .env && echo 'Add Variables into .env file!'",
     "react-dev": "webpack --watch",
     "start": "nodemon server/index.js --watch"
   },

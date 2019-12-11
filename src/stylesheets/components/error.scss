@@ -1,0 +1,22 @@
+@import 'src/stylesheets/base/master.scss';
+
+.errorWrapper
+{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .errorTitle
+    {
+        font-size: 48px;
+        text-align: center;
+    }
+
+    .errorBanner
+    {
+        height: 400px;
+        width: 400px;
+    }
+}
