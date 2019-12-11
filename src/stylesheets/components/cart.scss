@@ -1,0 +1,183 @@
+@import 'src/stylesheets/base/master.scss';
+
+.cartWrapper
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 130%;
+    left: 50%;
+    margin-left: -45%;
+    background: #d5d1d1;
+    width: 90%;
+    min-height: 100%;
+    padding: 40px;
+    color: #000;
+    border-radius: 29px;
+}
+
+.smallCartWrapper
+{
+    width: 50%;
+}
+.emptyCart
+{
+    font-size: 48px;
+    text-transform: uppercase;
+    padding: 100px;
+}
+
+.cartHeaderWrapper
+{
+    display: flex;
+    margin-bottom: 50px;
+    font-size: 48px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
+    .cartTitle
+    {
+        text-transform: capitalize;
+        color: rgb(96, 96, 96);
+        font-size: 38px;
+        margin-left: 25px;
+        margin-right: 50%;
+    }
+
+    .cartClose
+    {
+        cursor: pointer!important;
+        font-size: 38px!important;
+        color: rgb(96, 96, 96)!important;
+        align-self: safe!important;
+        justify-self: flex-end!important;
+    }
+    
+    .cartLogo {
+        height: 75px;
+        width: 75px;
+    }
+}
+
+.cartItemWrapper
+{
+    display: flex;
+    font-size: 14px;
+    margin: 10px 0;
+    align-self: flex-start;
+    background: #e0e0e0;
+    flex-direction: column;
+    border-radius: 3px;
+    padding: 5px;
+    min-width: 70%;
+    .cartInnerWrapper
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cartItemName
+    {
+        font-size: 28px;
+        padding: 10px;
+        color: rgb(96, 96, 96);
+    }
+
+    
+    .cartItemPrice
+    {
+        font-size: 18px;
+        font-style: italic;
+        padding: 10px;
+    }
+
+    .priceTotal
+    {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .cartItemQuantity
+    {
+        font-size: 18px;
+        padding: 10px;
+        color: tomato;
+    }
+    .cartItemCategory
+    {
+        padding-left: 10px;
+        color: rgb(160, 158, 158);
+    }
+    
+}
+
+.cartFooterWrapper
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 25px 0 0 0;
+    align-self: flex-end;
+    background: #c8c2c2b8;
+    padding: 20px 20px 20px 20px;
+    border-radius: 3px;
+    
+    .footerSpecial
+    {
+        font-size: 38px;
+        padding-left: 24px;
+        color: rgb(13, 71, 13);
+    }
+}
+
+.innerFooterWrapper
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.completeButton
+{
+    width: 200px;
+    height: 50px;
+    color: $secondarycolor;
+    background: #ffffff44;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 10px;
+    margin-top: 25px;
+    &:hover {
+        background: $primarycolor;
+    }
+}
+
+.confirmationMsg
+{
+    font-size: 78px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.confSuccessPicture
+{
+    background-image: url('https://grrrimages.s3-us-west-1.amazonaws.com/images/ordersuccess.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: fill;
+    height: 300px;
+    width: 300px;
+    margin: 25px auto;
+}
+
+.flexEnd
+{
+    justify-content: flex-end;
+}

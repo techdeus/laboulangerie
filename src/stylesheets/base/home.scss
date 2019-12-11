@@ -9,7 +9,7 @@
 .productsWrapper
 {
     margin-top: 150px;
-    display: grid;
+    @include vendor-prefix(display, grid);
     grid-template-columns: 1fr;
     justify-content: center;
     

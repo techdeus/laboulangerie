@@ -2,7 +2,7 @@
 
 .productWrapper
 {
-    display: flex;
+    @include vendor-prefix(display, flex);
     flex-direction: column;
     background: #1e55eb4d;
     border: none;

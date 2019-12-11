@@ -90,42 +90,42 @@ const productModel = DB.define('products', {
     }
 });
 
-// const orderModel = DB.define('orders', {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         primaryKey: true,
-//         autoIncrement: true,
-//     },
-//     date: {
-//         type: Sequelize.DATE,
-//         allowNull: false,
-//     },
-//     products: {
-//         type: Sequelize.ARRAY,
-//         allowNull: false,
-//     },
-//     user_id: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false,
-//         references: {
-//             model: 'users',
-//             key: 'id',
-//         },
-//     },
-//     store_id: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false,
-//         references: {
-//             model: 'stores',
-//             key: 'id',
-//         },
-//     },
-// });
+const orderModel = DB.define('orders', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    products: {
+        type: Sequelize.JSON,
+        allowNull: false,
+    },
+    user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id',
+        },
+    },
+    store_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'stores',
+            key: 'id',
+        },
+    },
+});
 
 module.exports = {
     DB,
     storeModel,
     userModel,
     productModel,
-    // orderModel
+    orderModel,
 };

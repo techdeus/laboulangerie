@@ -11,3 +11,31 @@
 {
     text-transform: capitalize;
 }
+
+.navOpenCart
+{
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.navStore
+{
+        display: none;
+}
+
+.navUser
+{
+        display: none;
+}
+
+@include breakpoint(medium) {
+    .navStore
+    {
+        display: block;
+    }
+    .navUser
+    {
+        display: block;
+    }
+}

@@ -51,7 +51,7 @@ function Login() {
 
     return (
         <div className="wrapper">
-            <div className="title">welcome to laboulangerie Commissary</div>
+            <img className="loginSplashPic" src="/img/assets/cafe_logo_big.jpg" alt="Logo"/>
             <div className="loginWrapper">
                 <input 
                     type="text" 
