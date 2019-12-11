@@ -102,6 +102,6 @@ app.listen(process.env.PORT, () => {
 });
 
 // (async function() {
-//     const url = await ngrok.connect(8282);
+//     const url = await ngrok.connect(8282).catch(err => console.log(err));
 //     console.log('URL: ', url);
 // })();
