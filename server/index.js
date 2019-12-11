@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 8282;
 const { userModel, storeModel, productModel, orderModel } = require('./database/models');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ngrok = require('ngrok');
 
