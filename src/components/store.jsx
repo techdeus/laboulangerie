@@ -18,5 +18,5 @@ export const InfoProvider = (props) => {
         <InfoContext.Provider value={store}>
             { props.children }
         </InfoContext.Provider>
-    )
+    );
 };
