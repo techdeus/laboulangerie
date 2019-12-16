@@ -98,7 +98,7 @@ function Product({ product, cart, setCart }) {
     if (!showDetails) {
         return (
             <div className={inCart ? `productWrapper inCart` : `productWrapper`}>
-                <div className="topHalf">
+                <div className="topHalfWrapper">
                     <div className="productName">{product.name}</div>
                     <div className="productPrice">${product.price}</div>
                     <div className="productCategory">({product.category})</div>
@@ -128,13 +128,13 @@ function Product({ product, cart, setCart }) {
 
     return (
         <div className={inCart ? `productWrapper extendWrapper inCart` : `productWrapper extendWrapper`}>
-            <div className="topHalf">
+            <div className="topHalfWrapper">
                 <div className="productName">{product.name}</div>
                 <div className="productPrice">${product.price}</div>
                 <div className="productCategory">({product.category})</div>
             </div>
             <div className="bottomHalfWrapper">
-                <div className="bottomHalf">
+                <div className="bottomHalfLeft">
                     <TextField 
                         id="standard-number"
                         label={quantity.monday !== 0 ? `Added` : `Add Mon`}
@@ -220,9 +220,15 @@ function Product({ product, cart, setCart }) {
                         name="sunday"
                     />
                 </div>
-            {
-                    inCart ? <IconButton aria-label="delete" onClick={removeFromCart}><DeleteIcon  className="deleteIcon" /></IconButton> : <IconButton onClick={addToCart}><AddShoppingCartIcon className="cartIcon" /></IconButton>
-                }
+                <div className="bottomHalfRight">
+                    {
+                        inCart ? 
+                            <IconButton aria-label="delete" onClick={removeFromCart}><DeleteIcon  className="deleteIcon" /></IconButton> 
+                        : 
+                            <IconButton onClick={addToCart}><AddShoppingCartIcon className="cartIcon" /></IconButton>
+                    }
+                    <span className="totalQuantity">{totalQuantity}</span>
+                </div>
                 {
                     error ? <span className="error">{error}</span> : null
                 }

@@ -56,6 +56,7 @@
     cursor: pointer!important;
     margin: 10px!important;
     top: 10px!important;
+    flex-grow: 1;
     &:hover {
         color: rgb(15, 92, 15)!important;
     }
@@ -69,9 +70,10 @@
 .deleteIcon
 {
     top: 10px!important;
+    flex-grow: 1;
 }
 
-.topHalf
+.topHalfWrapper
 {
     display: flex;
     background: #ffffff;
@@ -87,13 +89,13 @@
 .bottomHalfWrapper
 {
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 70% 30%;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.bottomHalf
+.bottomHalfLeft
 {
     display: flex;
     flex-direction: column;
@@ -102,6 +104,27 @@
     margin-bottom: 10px;
     align-items: center;
     justify-content: center;
+}
+
+.bottomHalfRight
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    .totalQuantity
+    {
+        font-family: $secondaryFont;
+        font-size: 72px;
+        color: rgba(0, 0, 0, 0.404);
+        padding: 10px 0;
+        align-self: flex-end;
+    }
 }
 
 .inCart
