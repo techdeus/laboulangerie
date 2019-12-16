@@ -9,7 +9,7 @@ function Loader({ isLoading, size, thickness }) {
             </div>
         );
     }
-    return <></>
+    return <></>;
 }
 
 export default Loader;

@@ -24,7 +24,7 @@ function Cart({ showCart, setShowCart }) {
     useEffect(() => {
         let currTotal = 0.00;
         cart[0].map((item) => {
-            return currTotal += parseFloat(item.product.price) * item.quantity;
+            return currTotal += parseFloat(item.product.price) * item.totalQuantity;
         });
         setTotal(currTotal);
     }, [cart]);
@@ -120,8 +120,8 @@ function CartItem({ product, removeFromCart }) {
             <div className="cartInnerWrapper">
                 <div className="cartItemName">{product.product.name}</div>
                 <div className="cartItemPrice">${product.product.price}</div>
-                <div className="cartItemQuantity">{product.quantity}</div>
-                <div className="cartItemPrice priceTotal">${(product.product.price * product.quantity).toFixed(2)}</div>
+                <div className="cartItemQuantity">{product.totalQuantity}</div>
+                <div className="cartItemPrice priceTotal">${(product.product.price * product.totalQuantity).toFixed(2)}</div>
                 <IconButton aria-label="delete" onClick={() => removeFromCart(product.product.id)}><DeleteIcon  className="deleteIcon" /></IconButton>
             </div>
             <div className="cartItemCategory">({product.product.category})</div>
