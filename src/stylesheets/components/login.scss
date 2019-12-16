@@ -42,10 +42,16 @@
     cursor: pointer;
     font-size: 24px;
     border-radius: 10px;
-
+    display: flex;
+    text-align: center;
+    justify-content: center;
     &:hover {
         background: $primarycolor;
         border: none;
+    }
+    .loginButtonText
+    {
+        padding: 0 10px;
     }
 }
 

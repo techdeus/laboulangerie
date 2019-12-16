@@ -46,64 +46,64 @@ function readData(filename) {
 //     .catch(err => console.log(err));
 
 
-// readData(path.join(__dirname, 'users.csv'))
-// .then((data) => {
-//     const lines = data.split('\n');
-//     const seed = async () => {
-//         try {
-//             await DB.sync({force: false});
-//             let i = 0;
-//             lines.forEach(async (user, i) => {
-//                 const splitUser = user.split(',');
-//                 const newUser = await userModel.create({
-//                     username: splitUser[0],
-//                     password: await bcrypt.hash(splitUser[1], 10),
-//                     store_id: parseInt(splitUser[2]),
-//                 }).catch(err => console.log(err));
-//                 console.log('User Added');
-//             });
-//         } catch (err) {
-//             console.error(err);
-//         }
-//     };
-//     seed();
-// })
-//     .catch(err => console.log(err));
+readData(path.join(__dirname, 'users.csv'))
+.then((data) => {
+    const lines = data.split('\n');
+    const seed = async () => {
+        try {
+            await DB.sync({force: false});
+            let i = 0;
+            lines.forEach(async (user, i) => {
+                const splitUser = user.split(',');
+                const newUser = await userModel.create({
+                    username: splitUser[0],
+                    password: await bcrypt.hash(splitUser[1], 10),
+                    store_id: parseInt(splitUser[2]),
+                }).catch(err => console.log(err));
+                console.log('User Added');
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    seed();
+})
+    .catch(err => console.log(err));
 
 
-// readData(path.join(__dirname, 'products.csv'))
-// .then((data) => {
-//     const lines = data.split('\n');
-//     const seed = async () => {
-//         try {
-//             await DB.sync({force: false});
-//             lines.forEach(async (product, i) => {
-//                 const splitProduct = product.split(',');
-//                 if (splitProduct.length === 4) {
-//                     const newUser = await productModel.create({
-//                         name: splitProduct[0],
-//                         price: parseFloat(splitProduct[1]),
-//                         category: splitProduct[2],
-//                         isactive: false,
-//                     })
-//                     .catch(err => console.log(err));    
-//                 } else {
-//                     const newUser = await productModel.create({
-//                         name: splitProduct[0],
-//                         price: parseFloat(splitProduct[1]),
-//                         category: splitProduct[2].trim(),
-//                     })
-//                     .catch(err => console.log(err));
-//                 }
-//                 console.log('Product Added');
-//             });
-//         } catch (err) {
-//             console.error(err);
-//         }
-//     };
-//     seed();
-// })
-//     .catch(err => console.log(err));
+readData(path.join(__dirname, 'products.csv'))
+.then((data) => {
+    const lines = data.split('\n');
+    const seed = async () => {
+        try {
+            await DB.sync({force: false});
+            lines.forEach(async (product, i) => {
+                const splitProduct = product.split(',');
+                if (splitProduct.length === 4) {
+                    const newUser = await productModel.create({
+                        name: splitProduct[0],
+                        price: parseFloat(splitProduct[1]),
+                        category: splitProduct[2],
+                        isactive: false,
+                    })
+                    .catch(err => console.log(err));    
+                } else {
+                    const newUser = await productModel.create({
+                        name: splitProduct[0],
+                        price: parseFloat(splitProduct[1]),
+                        category: splitProduct[2].trim(),
+                    })
+                    .catch(err => console.log(err));
+                }
+                console.log('Product Added');
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    seed();
+})
+    .catch(err => console.log(err));
 
 // const products = [{"product":{"id":25,"name":"Apple Chausson","price":"1.66","category":"viennosserie","isactive":true,"createdAt":"2019-12-06T17:20:34.757Z","updatedAt":"2019-12-06T17:20:34.757Z"},"quantity":3},{"product":{"id":6,"name":"Corn Jalapeno Ciabatte","price":"2.55","category":"bread","isactive":true,"createdAt":"2019-12-06T17:20:34.754Z","updatedAt":"2019-12-06T17:20:34.754Z"},"quantity":10}];
 

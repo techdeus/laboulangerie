@@ -1,0 +1,13 @@
+@import 'src/stylesheets/base/master.scss';
+
+.internalLoaderWrapper
+{
+    width: auto;
+    height: auto;
+    padding: 0 10px;
+    
+    .loader
+    {
+        color: tomato!important;
+    }
+}

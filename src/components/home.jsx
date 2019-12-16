@@ -3,6 +3,7 @@ import { InfoContext } from './store';
 import { Redirect } from 'react-router-dom';
 import NavBar from './navbar';
 import Product from './product';
+import Loader from './loader';
 import Axios from 'axios';
 import '../stylesheets/base/home.scss';
 
@@ -12,11 +13,13 @@ function Home() {
     const [ error, setError ] = useState('');
     const { appInfo } = useContext(InfoContext);
     const { cart } = useContext(InfoContext);
-
     
-    if (window.localStorage.getItem('data') == null) {
+    if (appInfo[0]['message'] !== "Logged In") {
         return <Redirect to='/' />;
     }
+    // if (window.localStorage.getItem('data') == null) {
+    //     return <Redirect to='/' />;
+    // }
 
     useEffect(() => {
         const data = JSON.parse(window.localStorage.getItem('data'));
@@ -25,13 +28,13 @@ function Home() {
         Axios.get('/allproducts', {
             headers: { 'Authorization': "bearer " + token }
         })
-        .then((res) => {
-            const data = res.data;
-            const sortedData = data.sort((a, b) => a.name > b.name ? 1 : -1);
-            setProducts(sortedData);
-        })
-        .catch(err => setError(err.response.data.message));
-        setLoading(false);
+            .then((res) => {
+                const data = res.data;
+                const sortedData = data.sort((a, b) => a.name > b.name ? 1 : -1);
+                setProducts(sortedData);
+                setLoading(false);
+            })
+                .catch(err => setError(err.response.data.message));
     }, []);
     
 
@@ -39,7 +42,7 @@ function Home() {
         <div className="homeWrapper">
             <NavBar />
             {
-                loading ? <div>Loading... </div> : null
+                loading ? <div className="loaderWrapper"><Loader isLoading={loading} size="3rem" thickness={2} /> </div> : null
             }
             {
                 error ? <div>{error} </div> : null
