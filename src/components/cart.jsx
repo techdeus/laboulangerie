@@ -94,6 +94,21 @@ function Cart({ showCart, setShowCart }) {
                     <div className="cartTitle">{store || appInfo.store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon className="cartClose" /> </IconButton>
                 </div>
+                
+                <div className="headerInnerWrapper"> 
+                    <div className="cartItemNameHeader">Name</div>
+                    <div className="cartItemPriceHeader">Per Item</div>
+                    <div className="cartItemQuantityHeader">Mon</div>
+                    <div className="cartItemQuantityHeader">Tue</div>
+                    <div className="cartItemQuantityHeader">Wed</div>
+                    <div className="cartItemQuantityHeader">Thur</div>
+                    <div className="cartItemQuantityHeader">Fri</div>
+                    <div className="cartItemQuantityHeader">Sat</div>
+                    <div className="cartItemQuantityHeader">Sun</div>
+                    <div className="cartItemTotalQuantityHeader">Tot</div>
+                    <div className="cartItemPriceHeader">Sub</div>
+                </div>
+                
                 {
                     cart[0].map((item) => (
                         <CartItem key={item.product.id} product={item} removeFromCart={removeFromCart} />
@@ -120,7 +135,15 @@ function CartItem({ product, removeFromCart }) {
             <div className="cartInnerWrapper">
                 <div className="cartItemName">{product.product.name}</div>
                 <div className="cartItemPrice">${product.product.price}</div>
-                <div className="cartItemQuantity">{product.totalQuantity}</div>
+                <div className="cartItemQuantity">{product.quantity.monday}</div>
+                <div className="cartItemQuantity">{product.quantity.tuesday}</div>
+                <div className="cartItemQuantity">{product.quantity.wednesday}</div>
+                <div className="cartItemQuantity">{product.quantity.thursday}</div>
+                <div className="cartItemQuantity">{product.quantity.friday}</div>
+                <div className="cartItemQuantity">{product.quantity.saturday}</div>
+                <div className="cartItemQuantity">{product.quantity.sunday}</div>
+                <div className="cartItemTotalQuantity">{product.totalQuantity}</div>
+                
                 <div className="cartItemPrice priceTotal">${(product.product.price * product.totalQuantity).toFixed(2)}</div>
                 <IconButton aria-label="delete" onClick={() => removeFromCart(product.product.id)}><DeleteIcon  className="deleteIcon" /></IconButton>
             </div>
