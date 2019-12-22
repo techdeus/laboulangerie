@@ -29,6 +29,19 @@
         display: none;
 }
 
+.drawer
+{
+    width: 240px!important;
+
+}
+
+.drawerHeader
+{
+    display: flex!important;
+    align-items: center!important;
+    justify-content: flex-end!important;
+}
+
 @include breakpoint(medium) {
     .navStore
     {

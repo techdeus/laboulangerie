@@ -2,9 +2,11 @@ import React, { Fragment, useState, useContext } from 'react';
 import { InfoContext } from './store';
 import Cart from './cart';
 import { useHistory } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Switch, FormControlLabel, FormControl, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Switch, FormControlLabel, FormControl, Typography, Drawer, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import '../stylesheets/components/navbar.scss';
 
 const useStyles = makeStyles(theme => ({
@@ -18,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function NavBar() {
     const [ isLoggedIn, setLoggedIn ] = useState(true);
+    const [ open, setOpen ] = useState(false);
     const { appInfo } = useContext(InfoContext);
     const { cart } = useContext(InfoContext);
     const [ showCart, setShowCart ] = useState(false);
@@ -39,12 +42,20 @@ function NavBar() {
         return;
     };
 
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
+
     return (
         <Fragment>
             <AppBar className={classes.appBar}>
                 <Cart showCart={showCart} setShowCart={setShowCart} />
                 <Toolbar className="navtoolbar">
-                    <IconButton edge="start" color="inherit" aria-label="open drawer">
+                    <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
                         <MenuIcon />
                     </IconButton>
                     <Typography noWrap variant="h6" className="navContent navStore">Store: {store} </Typography>
@@ -58,6 +69,19 @@ function NavBar() {
                     </IconButton>
                 </Toolbar>
             </AppBar>
+            <Drawer
+                className="drawer"
+                variant="persistent"
+                anchor="left"
+                open={open}
+            > 
+                <div className="drawerHeader">
+                    <IconButton onClick={handleDrawerClose}>
+                        {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
+            </Drawer>
         </Fragment>
     );
 }
