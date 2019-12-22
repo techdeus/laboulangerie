@@ -2,12 +2,18 @@ import React, { Fragment, useState, useContext } from 'react';
 import { InfoContext } from './store';
 import Cart from './cart';
 import { useHistory } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Switch, FormControlLabel, FormControl, Typography, Drawer, Divider } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Switch, FormControlLabel, FormControl, Typography, Drawer, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import LockIcon from '@material-ui/icons/Lock';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import '../stylesheets/components/navbar.scss';
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -15,6 +21,12 @@ const useStyles = makeStyles(theme => ({
         bottom: 'auto',
         background: '#1E56EB',
         position: 'relative',
+    },
+    drawer: {
+        width: drawerWidth,
+    },
+    drawerPaper: {
+        width: drawerWidth,
     }
 }));
 
@@ -35,6 +47,11 @@ function NavBar() {
         cart[1]([]);
         setLoggedIn(false);
         history.push('/');
+    };
+
+    const goLink = (url) => {
+        handleDrawerClose();
+        history.push(`/${url}`);
     };
 
     const viewCart = () => {
@@ -70,17 +87,38 @@ function NavBar() {
                 </Toolbar>
             </AppBar>
             <Drawer
-                className="drawer"
+                className={classes.drawer}
                 variant="persistent"
                 anchor="left"
                 open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
             > 
                 <div className="drawerHeader">
+                    <div className="headerStore">Store: {store}</div>
                     <IconButton onClick={handleDrawerClose}>
                         {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
                 <Divider />
+                <List className="list">
+                    {['home', 'orders'].map((text, index) => (
+                        <ListItem button key={text} onClick={() => goLink(text)}>
+                            <ListItemIcon>{index % 2 === 0 ? <ViewListIcon /> : <HomeIcon /> }</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List className="list">
+                    {['change password', 'log out'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{index % 2 === 0 ? <LockIcon /> : <ExitToAppIcon /> }</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
             </Drawer>
         </Fragment>
     );

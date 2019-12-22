@@ -19,6 +19,7 @@
         text-decoration: underline;
     }
 }
+
 .navStore
 {
         display: none;
@@ -29,17 +30,26 @@
         display: none;
 }
 
-.drawer
-{
-    width: 240px!important;
-
-}
-
 .drawerHeader
 {
     display: flex!important;
     align-items: center!important;
     justify-content: flex-end!important;
+}
+
+.list
+{
+    text-transform: capitalize;
+}
+
+.headerStore
+{
+    justify-self: flex-start;
+    width: 100%;
+    align-self: center;
+    padding: 0 25px;
+    text-transform: capitalize;
+    font-weight: bold;
 }
 
 @include breakpoint(medium) {
