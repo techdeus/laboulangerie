@@ -103,21 +103,23 @@ function NavBar() {
                 </div>
                 <Divider />
                 <List className="list">
-                    {['home', 'orders'].map((text, index) => (
-                        <ListItem button key={text} onClick={() => goLink(text)}>
-                            <ListItemIcon>{index % 2 === 0 ? <ViewListIcon /> : <HomeIcon /> }</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List className="list">
-                    {['change password', 'log out'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <LockIcon /> : <ExitToAppIcon /> }</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem button key="home" onClick={() => goLink("home")}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary="home" />
+                    </ListItem>
+                    <ListItem button key="orders" onClick={() => goLink("orders")}>
+                        <ListItemIcon><ViewListIcon /></ListItemIcon>
+                        <ListItemText primary="orders" />
+                    </ListItem>
+                    <Divider />
+                    <ListItem button key="change password" onClick={() => goLink("changepassword")}>
+                        <ListItemIcon><LockIcon /></ListItemIcon>
+                        <ListItemText primary="change password" />
+                    </ListItem>
+                    <ListItem button key="logout" onClick={logout}>
+                        <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+                        <ListItemText primary="logout" />
+                    </ListItem>
                 </List>
             </Drawer>
         </Fragment>
