@@ -40,7 +40,7 @@ function Home() {
 
     return (
         <div className="homeWrapper">
-            <NavBar />
+            {/* <NavBar /> */}
             {
                 loading ? <div className="loaderWrapper"><Loader isLoading={loading} size="3rem" thickness={2} /> </div> : null
             }
