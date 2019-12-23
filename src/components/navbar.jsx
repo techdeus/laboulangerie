@@ -33,13 +33,12 @@ const useStyles = makeStyles(theme => ({
 function NavBar() {
     const [ isLoggedIn, setLoggedIn ] = useState(true);
     const [ open, setOpen ] = useState(false);
-    const { appInfo } = useContext(InfoContext);
-    const { cart } = useContext(InfoContext);
+    const { appInfo, cart } = useContext(InfoContext);
     const [ showCart, setShowCart ] = useState(false);
     const classes = useStyles();
     const history = useHistory();
-    const store = JSON.parse(window.localStorage.getItem('data')).store.name;
-    const user = JSON.parse(window.localStorage.getItem('data')).user.username;
+    const store = appInfo[0].store;
+    const user = appInfo[0].user;
 
     const logout = () => {
         window.localStorage.clear();
@@ -75,8 +74,8 @@ function NavBar() {
                     <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography noWrap variant="h6" className="navContent navStore">Store: {store} </Typography>
-                    <Typography noWrap variant="h6" className="navUser">User: {user} </Typography>
+                    <Typography noWrap variant="h6" className="navContent navStore">Store: {store.name} </Typography>
+                    <Typography noWrap variant="h6" className="navUser">User: {user.username} </Typography>
                     <Typography noWrap variant="h6" className="navContent navOpenCart" onClick={viewCart}>Items in Cart: {cart[0].length}</Typography>
                     <IconButton edge="end">
                         <FormControlLabel
@@ -96,7 +95,7 @@ function NavBar() {
                 }}
             > 
                 <div className="drawerHeader">
-                    <div className="headerStore">Store: {store}</div>
+                    <div className="headerStore">Store: {store.name}</div>
                     <IconButton onClick={handleDrawerClose}>
                         {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>

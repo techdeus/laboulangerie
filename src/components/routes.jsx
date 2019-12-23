@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { InfoContext } from './store';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Home from './home';
@@ -8,7 +8,11 @@ import NavBar from './navbar';
 
 function Routes() {
     const { appInfo } = useContext(InfoContext);
-    
+
+    useEffect(() => {
+
+    }, [appInfo[0]]);
+
     return (
             <BrowserRouter>
                 {

@@ -14,12 +14,10 @@ function Cart({ showCart, setShowCart }) {
     const [ error, setError ] = useState(false);
     const [ order, setOrder ] = useState(false);
     const [ msg, setMsg ] = useState('');
-    const { appInfo } = useContext(InfoContext);
-    const { cart } = useContext(InfoContext);
-    const store = JSON.parse(window.localStorage.getItem('data')).store.name;
-    const user = JSON.parse(window.localStorage.getItem('data')).user.username;
-    const data = JSON.parse(window.localStorage.getItem('data'));
-    const token = data.accessToken;
+    const { appInfo, cart } = useContext(InfoContext);
+    const store = appInfo[0].store;
+    const user = appInfo[0].user;
+    const token = appInfo[0].accessToken;
 
     useEffect(() => {
         let currTotal = 0.00;
@@ -78,7 +76,7 @@ function Cart({ showCart, setShowCart }) {
             <div className="cartWrapper">
                 <div className="cartHeaderWrapper">
                     <img className="cartLogo" src="/img/assets/cafe_logo.png" alt="Laboulangerie SF logo" />
-                    <div className="cartTitle">{store || appInfo.store.name}<span>'s Shopping Cart</span></div>
+                    <div className="cartTitle">{store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon /> </IconButton>
                 </div>
                 <div className="emptyCart">Empty Cart</div>
@@ -91,7 +89,7 @@ function Cart({ showCart, setShowCart }) {
             <div className="cartWrapper">
                 <div className="cartHeaderWrapper">
                     <img className="cartLogo" src="/img/assets/cafe_logo.png" alt="Laboulangerie SF logo" />
-                    <div className="cartTitle">{store || appInfo.store.name}<span>'s Shopping Cart</span></div>
+                    <div className="cartTitle">{store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon className="cartClose" /> </IconButton>
                 </div>
                 

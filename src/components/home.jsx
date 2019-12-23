@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { InfoContext } from './store';
 import { Redirect } from 'react-router-dom';
-import NavBar from './navbar';
 import Product from './product';
 import Loader from './loader';
 import Axios from 'axios';
@@ -11,19 +10,14 @@ function Home() {
     const [ products, setProducts ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState('');
-    const { appInfo } = useContext(InfoContext);
-    const { cart } = useContext(InfoContext);
+    const { appInfo, cart } = useContext(InfoContext);
     
     if (appInfo[0]['message'] !== "Logged In") {
         return <Redirect to='/' />;
     }
-    // if (window.localStorage.getItem('data') == null) {
-    //     return <Redirect to='/' />;
-    // }
 
     useEffect(() => {
-        const data = JSON.parse(window.localStorage.getItem('data'));
-        const token = data.accessToken;
+        const token = appInfo[0].accessToken;
         setLoading(true);
         Axios.get('/allproducts', {
             headers: { 'Authorization': "bearer " + token }
@@ -40,7 +34,6 @@ function Home() {
 
     return (
         <div className="homeWrapper">
-            {/* <NavBar /> */}
             {
                 loading ? <div className="loaderWrapper"><Loader isLoading={loading} size="3rem" thickness={2} /> </div> : null
             }
