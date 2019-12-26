@@ -4,22 +4,39 @@
 {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     justify-content: center;
     align-items: center;
+    background-color: $secondarycolor;
+    svg
+    {
+        display: block;
+        margin: 0;
+    }
+}
+
+.curved.upper
+{
+    width: 100vw;
+    background-color: $backgroundcolor;
+    svg
+    {
+        display: block;
+        margin: 0;
+    }
 }
 
 .loginWrapper > .inputBoxes
 {
     width: 35%;
     height: 100px;
-    font-size: 24px;
+    font-size: 1.5rem;
     outline: none;
     border: none;
-    margin: 10px 0px;
+    margin: 25px 0px;
     padding: 25px;
     text-align: center;
-    color: $secondarycolor;
+    color: #fff;
     background: #1e55eb18;
     border-radius: 10px;
     box-shadow: 0px 0px 18px 18px #ffffff44;
@@ -32,7 +49,7 @@
 
 .loginButton
 {
-    margin: 75px 0px;
+    margin: 75px 0px 0px 0px;
     width: 200px;
     height: 50px;
     color: $secondarycolor;
@@ -40,7 +57,7 @@
     border: 2px solid #ffffff44;
     outline: none;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 1.5rem;
     border-radius: 10px;
     display: flex;
     text-align: center;
