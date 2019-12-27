@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../stylesheets/components/footer.scss';
 
 function Footer() {
     return (
@@ -8,3 +8,5 @@ function Footer() {
         </div>
     )
 }
+
+export default Footer;

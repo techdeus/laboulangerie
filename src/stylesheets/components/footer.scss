@@ -1,0 +1,20 @@
+@import 'src/stylesheets/base/master.scss';
+
+.footerWrapper
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $secondarybackgroundcolor;
+    width: 100%;
+    height: 12rem;
+    span
+    {
+        font-size: 2rem;
+        font-family: $primaryFont;
+        color: #fff;
+    }
+}
+
+
+

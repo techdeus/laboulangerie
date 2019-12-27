@@ -5,6 +5,7 @@ import Home from './home';
 import Login from './login';
 import Error from './error';
 import NavBar from './navbar';
+import Footer from './footer';
 
 function Routes() {
     const { appInfo } = useContext(InfoContext);
@@ -23,6 +24,7 @@ function Routes() {
                     <Route exact path="/home" component={Home}/>
                     <Route component={Error} />
                 </Switch>
+                <Footer />
             </BrowserRouter>
     );
 }
