@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     appBar: {
         top: 0,
         bottom: 'auto',
-        background: '#1E56EB',
+        background: '#766d64',
         position: 'relative',
     },
     drawer: {
