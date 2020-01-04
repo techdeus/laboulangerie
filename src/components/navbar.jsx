@@ -74,7 +74,7 @@ function NavBar() {
                     <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={handleDrawerOpen}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography noWrap variant="h6" className="navContent navStore">Store: {store.name} </Typography>
+                    <Typography noWrap variant="h6" className="navContent navStore">Store: { user.superuser ? "Super User" : store.name} </Typography>
                     <Typography noWrap variant="h6" className="navUser">User: {user.username} </Typography>
                     <Typography noWrap variant="h6" className="navContent navOpenCart" onClick={viewCart}>Items in Cart: {cart[0].length}</Typography>
                     <IconButton edge="end">
@@ -95,7 +95,7 @@ function NavBar() {
                 }}
             > 
                 <div className="drawerHeader">
-                    <div className="headerStore">Store: {store.name}</div>
+                    <div className="headerStore">Store: { user.superuser ? "Super User" : store.name}</div>
                     <IconButton onClick={handleDrawerClose}>
                         {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>

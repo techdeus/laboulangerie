@@ -19,24 +19,29 @@ app.post('/login/user', async (req, res) => {
         const { username, password } = req.body;
         //
         if (username === '' || password === '') {
-            return res.status(400).send({ message: 'Please Enter Credentials' });
+            return res.status(400).send({ message: 'Please Enter User Credentials' });
         }
         
         const user = await userModel.findOne({ where: { username }});
         
         if (user == null) {
-            return res.status(400).json({message: 'User Not Found'});
+            return res.status(400).json({ message: 'Login Failed' });
         }
         
         if (await bcrypt.compare(password, user.password)) {
-            const store = await storeModel.findByPk(user.store_id);
             // user is authenticated
-            const { username, store_id } = user;
-            const tokenUser = { username: username, store: store_id };
+            const { username, password, superuser } = user;
+            let store;
+            if (superuser) {
+                store = await storeModel.findAll();
+            } else {
+                store = await storeModel.findByPk(user.store_id);
+            }
+            const tokenUser = { username: username, password: password };
             const accessToken = generateAccessToken(tokenUser);
             return res.status(200).json({ message: 'Logged In', user: user, store: store, accessToken: accessToken });;
         } else {
-            return res.status(400).send({ message: 'Not Authorized'});
+            return res.status(400).send({ message: 'Login Failed' });
         }
     } catch (err) {
         res.status(500).send(err);
