@@ -39,6 +39,10 @@ const storeModel = DB.define('stores', {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    manageremail: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    }
 });
 
 const userModel = DB.define('users', {
@@ -55,9 +59,13 @@ const userModel = DB.define('users', {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    superuser: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+    },
     store_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'stores',
             key: 'id',
@@ -98,11 +106,30 @@ const orderModel = DB.define('orders', {
     },
     date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
     },
     products: {
         type: Sequelize.JSON,
+        allowNull: true,
+        defaultValue: null,
+    },
+    weekOfYear: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+    },
+    begDayOfWeek: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    lastDayOfWeek: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    isOrdered: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
     },
     user_id: {
         type: Sequelize.INTEGER,
