@@ -30,7 +30,6 @@
     align-self: flex-start;
     width: 100%;
     height: 100%;
-    // margin-bottom: 10px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -63,8 +62,7 @@
 .addIcon
 {
     cursor: pointer;
-    margin: 10px!important;
-    // align-self: flex-end;   
+    margin: 10px!important; 
 }
 
 .cartIcon
@@ -81,14 +79,15 @@
 .quantityIcon
 {
     width: 100%!important;
-    font-size: .5rem!important;
     margin: 0 25px!important;
-    @include breakpoint(medium) {
-        width: 45%!important;
-        font-size: 1rem!important;
-    }
     label {
         font-size: 1rem!important;
+    }
+    @include breakpoint(medium) {
+        width: 45%!important;
+        label {
+            font-size: .7rem!important;
+        }
     }
 }
 
@@ -158,7 +157,7 @@
     .totalPrice
     {
         @extend .totalQuantity;
-        color: rgb(124, 173, 124);
+        color: #000;
         width: 100%;
         @include breakpoint(medium) {
             width: 45%;
@@ -170,5 +169,5 @@
 
 .inCart
 {
-    background: lightgreen;
+    background: rgba(23, 185, 23, 0.774);
 }
