@@ -137,7 +137,7 @@ function Product({ product, cart, setCart }) {
                 <div className="bottomHalfLeft">
                     <TextField 
                         id="standard-number"
-                        label={quantity.monday !== 0 ? `Added` : `Add Mon`}
+                        label={quantity.monday !== 0 ? `Added Mon` : `Add Mon`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.monday || ''}
@@ -149,7 +149,7 @@ function Product({ product, cart, setCart }) {
                     />
                     <TextField 
                         id="standard-number"
-                        label={quantity.tuesday !== 0 ? `Added` : `Add Tue`}
+                        label={quantity.tuesday !== 0 ? `Added Tue` : `Add Tue`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.tuesday || ''}
@@ -161,7 +161,7 @@ function Product({ product, cart, setCart }) {
                     />
                     <TextField 
                         id="standard-number"
-                        label={quantity.wednesday !== 0 ? `Added` : `Add Wed`}
+                        label={quantity.wednesday !== 0 ? `Added Wed` : `Add Wed`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.wednesday || ''}
@@ -173,7 +173,7 @@ function Product({ product, cart, setCart }) {
                     />
                     <TextField 
                         id="standard-number"
-                        label={quantity.thursday !== 0 ? `Added` : `Add Thur`}
+                        label={quantity.thursday !== 0 ? `Added Thur` : `Add Thur`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.thursday || ''}
@@ -185,7 +185,7 @@ function Product({ product, cart, setCart }) {
                     />
                     <TextField 
                         id="standard-number"
-                        label={quantity.friday !== 0 ? `Added` : `Add Fri`}
+                        label={quantity.friday !== 0 ? `Added Fri` : `Add Fri`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.friday || ''}
@@ -197,7 +197,7 @@ function Product({ product, cart, setCart }) {
                     />
                     <TextField 
                         id="standard-number"
-                        label={quantity.saturday !== 0 ? `Added` : `Add Sat`}
+                        label={quantity.saturday !== 0 ? `Added Sat` : `Add Sat`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.saturday || ''}
@@ -209,7 +209,7 @@ function Product({ product, cart, setCart }) {
                     />
                     <TextField 
                         id="standard-number"
-                        label={quantity.sunday !== 0 ? `Added` : `Add Sun`}
+                        label={quantity.sunday !== 0 ? `Added Sun` : `Add Sun`}
                         type="number"
                         onChange={addQuantity}
                         value={quantity.sunday || ''}
@@ -221,6 +221,7 @@ function Product({ product, cart, setCart }) {
                     />
                 </div>
                 <div className="bottomHalfRight">
+                    <div className="quantityWrapper">
                     {
                         inCart ? 
                             <IconButton aria-label="delete" onClick={removeFromCart}><DeleteIcon  className="deleteIcon" /></IconButton> 
@@ -228,6 +229,8 @@ function Product({ product, cart, setCart }) {
                             <IconButton onClick={addToCart}><AddShoppingCartIcon className="cartIcon" /></IconButton>
                     }
                     <span className="totalQuantity">{totalQuantity}</span>
+                    </div>
+                    <span className="totalPrice">${(totalQuantity * product.price).toFixed(2)}</span>
                 </div>
                 {
                     error ? <span className="error">{error}</span> : null
