@@ -11,7 +11,7 @@ function Footer() {
                 <a href="https://www.linkedin.com/in/techdeus/" target="_blank">
                     <span>Powered by TechDeus</span>
                 </a>
-                <span>Copyright &copy; 2019</span>
+                <span>Copyright &copy; 2020</span>
             </div>
         </div>
     )
