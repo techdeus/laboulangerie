@@ -65,13 +65,13 @@ app.get('/allproducts', authenticateToken, async (req, res) => {
     }
 });
 
-app.put('/orders', authenticateToken, async (req, res) => {
+app.put('/updateOrder', authenticateToken, async (req, res) => {
     try {
         const { products, date, order } = req.body;
         const jsonProd = JSON.stringify(products);
         const updateOrder = await orderModel.update(
             { date: date, products: jsonProd, isOrdered: true },
-            { where: order.id }
+            { where: { id: order.id }}
         );
         res.status(200).send({updateOrder, msg: 'Order Complete'});
     } catch (err) {
