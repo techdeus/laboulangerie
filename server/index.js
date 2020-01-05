@@ -8,6 +8,7 @@ const { userModel, storeModel, productModel, orderModel } = require('./database/
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ngrok = require('ngrok');
+const { getWeekDates } = require('./util/date');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,7 +18,11 @@ app.post('/login/user', async (req, res) => {
     // Authenticate User
     try {
         const { username, password } = req.body;
-        //
+        // get current Date
+        const now = Date.now();
+        // get week based on current date
+        const currWeek = getWeekDates(now);
+        // if any of the passed information is empty return a status 400 with message
         if (username === '' || password === '') {
             return res.status(400).send({ message: 'Please Enter User Credentials' });
         }
@@ -32,14 +37,17 @@ app.post('/login/user', async (req, res) => {
             // user is authenticated
             const { username, password, superuser } = user;
             let store;
+            let currOrder;
             if (superuser) {
                 store = await storeModel.findAll();
+                currOrder = await orderModel.findAll({ where: {weekOfYear: currWeek.weekNum }});
             } else {
                 store = await storeModel.findByPk(user.store_id);
+                currOrder = await orderModel.findOne({ where: { weekOfYear: currWeek.weekNum, store_id: user.store_id }});
             }
             const tokenUser = { username: username, password: password };
             const accessToken = generateAccessToken(tokenUser);
-            return res.status(200).json({ message: 'Logged In', user: user, store: store, accessToken: accessToken });;
+            return res.status(200).json({ message: 'Logged In', user: user, store: store, order: currOrder, accessToken: accessToken });;
         } else {
             return res.status(400).send({ message: 'Login Failed' });
         }
@@ -57,12 +65,15 @@ app.get('/allproducts', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/orders', authenticateToken, async (req, res) => {
+app.put('/orders', authenticateToken, async (req, res) => {
     try {
-        const { products, date, user, store } = req.body;
+        const { products, date, order } = req.body;
         const jsonProd = JSON.stringify(products);
-        const order = await orderModel.create({ date: date, products: jsonProd, user_id: user.id, store_id: store.id });
-        res.status(201).send({order, msg: 'Order Complete'});
+        const updateOrder = await orderModel.update(
+            { date: date, products: jsonProd, isOrdered: true },
+            { where: order.id }
+        );
+        res.status(200).send({updateOrder, msg: 'Order Complete'});
     } catch (err) {
         res.status(500).send({message: 'Something went wrong'});
     }
