@@ -44,7 +44,7 @@ function Cart({ showCart, setShowCart }) {
         };
 
         try {
-            const results = await Axios.post('/orders', totalOrder,{
+            const results = await Axios.post('/orders', totalOrder, {
                 headers: { 'Authorization': "bearer " + token }
             }
             );
@@ -76,7 +76,7 @@ function Cart({ showCart, setShowCart }) {
             <div className="cartWrapper">
                 <div className="cartHeaderWrapper">
                     <img className="cartLogo" src="/img/assets/cafe_logo.png" alt="Laboulangerie SF logo" />
-                    <div className="cartTitle">{store.name}<span>'s Shopping Cart</span></div>
+                    <div className="cartTitle">{user.superuser ? 'Super User' : store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon /> </IconButton>
                 </div>
                 <div className="emptyCart">Empty Cart</div>
@@ -89,7 +89,7 @@ function Cart({ showCart, setShowCart }) {
             <div className="cartWrapper">
                 <div className="cartHeaderWrapper">
                     <img className="cartLogo" src="/img/assets/cafe_logo.png" alt="Laboulangerie SF logo" />
-                    <div className="cartTitle">{store.name}<span>'s Shopping Cart</span></div>
+                    <div className="cartTitle">{user.superuser ? 'Super User' : store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon className="cartClose" /> </IconButton>
                 </div>
                 
