@@ -18,6 +18,7 @@ function Cart({ showCart, setShowCart }) {
     const store = appInfo[0].store;
     const user = appInfo[0].user;
     const token = appInfo[0].accessToken;
+    const currOrder = appInfo[0].order;
 
     useEffect(() => {
         let currTotal = 0.00;
@@ -40,14 +41,15 @@ function Cart({ showCart, setShowCart }) {
             products: cart[0],
             store: appInfo[0].store,
             user: appInfo[0].user,
+            order: appInfo[0].order,
             date: new Date(Date.now()),
         };
 
         try {
-            const results = await Axios.post('/orders', totalOrder, {
-                headers: { 'Authorization': "bearer " + token }
-            }
-            );
+            const results = await Axios.put('/updateOrder', totalOrder, 
+                {
+                    headers: { 'Authorization': "bearer " + token }
+                });
             // clear the shopping cart
             cart[1]([]);
             // clear the local cache
