@@ -2,6 +2,13 @@ const fs = require('fs');
 const { DB, storeModel, userModel, productModel , orderModel } = require('./models');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const { getWeekdates } = require('../util/date');
+const getWeek = require('date-fns/getWeek');
+const getYear = require('date-fns/getYear');
+const getStart = require('date-fns/startOfWeek');
+const getEnd = require('date-fns/lastDayOfWeek');
+const addDays = require('date-fns/addDays')
+const format = require('date-fns/format');
 
 function readData(filename) {
     return new Promise((resolve, reject) => {
@@ -106,28 +113,71 @@ function readData(filename) {
 // })
 //     .catch(err => console.log(err));
 
-readData(path.join(__dirname, 'orders.csv'))
-.then((data) => {
-    const lines = data.split('\n');
-    const seed = async () => {
-        try {
-            await DB.sync({ force: false });
-            lines.forEach((order) => {
-                const splitOrder = order.split(',');
+// readData(path.join(__dirname, 'orders.csv'))
+// .then((data) => {
+//     const lines = data.split('\n');
+//     const seed = async () => {
+//         try {
+//             await DB.sync({ force: false });
+//             lines.forEach((order) => {
+//                 const splitOrder = order.split(',');
+//                 const newOrder = orderModel.create({
+//                     weekOfYear: parseInt(splitOrder[0]),
+//                     begDayOfWeek: splitOrder[1],
+//                     lastDayOfWeek: splitOrder[2],
+//                     user_id: parseInt(splitOrder[3]),
+//                     store_id: parseInt(splitOrder[4]),
+//                 })
+//                     .then((order) => console.log('Order Created'))
+//                         .catch(err => console.log(err));
+//             })
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     }
+//     seed();
+// })
+// .catch(err => console.error(err));
+
+
+const mapStoreUser = {
+    1: 2,
+    2: 3,
+    3: 4,
+    4: 5,
+    5: 6,
+    6: 7,
+    9: 1,
+    7: 8
+};
+
+const seedOrders = async () => {
+    try {
+        await DB.sync({ force: false });
+        let date = Date.parse('2019-12-30T08:00:00.000Z');
+        for (let i = 1; i <= 52; ++i) {
+            let startDay = getStart(date, {weekStartsOn: 1});
+            let endDay = getEnd(date, { weekStartsOn: 1});
+            let weekNum = getWeek(date, {weekStartsOn: 1});
+            let year = getYear(date);
+            for (let j = 1; j <= 9; ++j) {
+                if (j === 8) continue;
                 const newOrder = orderModel.create({
-                    weekOfYear: parseInt(splitOrder[0]),
-                    begDayOfWeek: splitOrder[1],
-                    lastDayOfWeek: splitOrder[2],
-                    user_id: parseInt(splitOrder[3]),
-                    store_id: parseInt(splitOrder[4]),
+                    weekOfYear: weekNum,
+                    currYear: year,
+                    begDayOfWeek: startDay,
+                    lastDayOfWeek: endDay,
+                    user_id: j,
+                    store_id: mapStoreUser[j],
                 })
-                    .then((order) => console.log('Order Created'))
-                        .catch(err => console.log(err));
-            })
-        } catch (err) {
-            console.error(err);
-        }
-    }
-    seed();
-})
-.catch(err => console.error(err));
+                .then((order) => console.log('Order Created'))
+                    .catch(err => console.log(err));
+            }
+            date = addDays(date, 7);
+        }        
+    } catch (err) {
+        console.log(err);
+    }   
+}
+
+seedOrders();

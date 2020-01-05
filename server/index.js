@@ -8,7 +8,7 @@ const { userModel, storeModel, productModel, orderModel } = require('./database/
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ngrok = require('ngrok');
-const { getWeekDates } = require('./util/date');
+const { getWeekDates, addDays } = require('./util/date');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +21,8 @@ app.post('/login/user', async (req, res) => {
         // get current Date
         const now = Date.now();
         // get week based on current date
-        const currWeek = getWeekDates(now);
+        const currWeek = getWeekDates(addDays(now, 7));
+        
         // if any of the passed information is empty return a status 400 with message
         if (username === '' || password === '') {
             return res.status(400).send({ message: 'Please Enter User Credentials' });

@@ -118,6 +118,10 @@ const orderModel = DB.define('orders', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    currYear: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     begDayOfWeek: {
         type: Sequelize.DATE,
         allowNull: false,

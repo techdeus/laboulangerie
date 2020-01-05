@@ -2,6 +2,7 @@
 // new Date(yyyy, mm, dd, hh, mm, ss, 000)
 
 const getWeek = require('date-fns/getWeek');
+const getYear = require('date-fns/getYear');
 const getStart = require('date-fns/startOfWeek');
 const getEnd = require('date-fns/lastDayOfWeek');
 const addDays = require('date-fns/addDays')
@@ -12,9 +13,11 @@ const getWeekDates = (date) => {
     const today = format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")
     const startDay = getStart(date, {weekStartsOn: 1});
     const endDay = getEnd(date, {weekStartsOn: 1});
-    const weekNum = getWeek(date);
+    const weekNum = getWeek(date, {weekStartsOn: 1});
+    const year = getYear(date);
+    
     let weekDates = [];
-
+    
     for (let i = 0; i < 7; ++i) {
         weekDates.push(addDays(startDay, i));
     }
@@ -22,12 +25,14 @@ const getWeekDates = (date) => {
     return {
         datePassed: today, 
         weekNum, 
+        year,
         startDay, 
         endDay, 
-        weekDates
+        weekDates,
     };
 }
 
 module.exports = {
     getWeekDates,
+    addDays,
 };
