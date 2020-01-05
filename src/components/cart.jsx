@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import Confirmation from './confirmation';
 import { InfoContext } from './store';
 import '../stylesheets/components/cart.scss';
+import Axios from 'axios';
 import { IconButton } from '@material-ui/core';
 import DeleteIcon  from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close';
-import Axios from 'axios';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ViewListIcon from '@material-ui/icons/ViewList';
 
