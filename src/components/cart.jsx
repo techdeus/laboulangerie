@@ -23,9 +23,6 @@ function Cart({ showCart, setShowCart }) {
     const token = appInfo[0].accessToken;
     const currOrder = appInfo[0].order;
     
-    const begWeek = format(parseISO(currOrder.begDayOfWeek), 'EEE MMMM do yyyy');
-    const endWeek = format(parseISO(currOrder.lastDayOfWeek), 'EEE MMMM do yyyy');
-    
     useEffect(() => {
         let currTotal = 0.00;
         cart[0].map((item) => {
