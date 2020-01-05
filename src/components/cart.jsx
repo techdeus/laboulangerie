@@ -4,6 +4,7 @@ import { InfoContext } from './store';
 import Loader from './loader';
 import '../stylesheets/components/cart.scss';
 import Axios from 'axios';
+import { format, parseISO } from 'date-fns';
 import { IconButton } from '@material-ui/core';
 import DeleteIcon  from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close';
@@ -21,7 +22,10 @@ function Cart({ showCart, setShowCart }) {
     const user = appInfo[0].user;
     const token = appInfo[0].accessToken;
     const currOrder = appInfo[0].order;
-
+    
+    const begWeek = format(parseISO(currOrder.begDayOfWeek), 'EEE MMMM do yyyy');
+    const endWeek = format(parseISO(currOrder.lastDayOfWeek), 'EEE MMMM do yyyy');
+    
     useEffect(() => {
         let currTotal = 0.00;
         cart[0].map((item) => {
@@ -81,9 +85,15 @@ function Cart({ showCart, setShowCart }) {
                 <div className="cartHeaderWrapper">
                     <img className="cartLogo" src="/img/assets/cafe_logo.png" alt="Laboulangerie SF logo" />
                     <div className="cartTitle">{user.superuser ? 'Super User' : store.name}<span>'s Shopping Cart</span></div>
-                    <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon /> </IconButton>
+                    <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> 
+                        <CloseIcon /> 
+                    </IconButton>
+                    <div className="orderHeader">
+                        Current Week: <span className="weekHighlight">#{currOrder.weekOfYear}</span>
+                        {format(parseISO(currOrder.begDayOfWeek), "EEE '-' MMMM do yyyy")} <span className="weekHighlight">to</span>{format(parseISO(currOrder.lastDayOfWeek), "EEE '-' MMMM do yyyy")}
+                    </div>
                 </div>
-                <div className="emptyCart">Empty Cart</div>
+                <div className="emptyCart">Empty</div>
                 <img className="emptyCartPic" src="/img/assets/empty_cart.png" alt="Empty Shopping Cart" />
             </div>
         )
@@ -95,6 +105,10 @@ function Cart({ showCart, setShowCart }) {
                     <img className="cartLogo" src="/img/assets/cafe_logo.png" alt="Laboulangerie SF logo" />
                     <div className="cartTitle">{user.superuser ? 'Super User' : store.name}<span>'s Shopping Cart</span></div>
                     <IconButton edge="end" className="cartClose" onClick={() => setShowCart(false)}> <CloseIcon className="cartClose" /> </IconButton>
+                    <div className="orderHeader">
+                        Current Week: <span className="weekHighlight">#{currOrder.weekOfYear}</span>
+                        {format(parseISO(currOrder.begDayOfWeek), "EEE '-' MMMM do yyyy")} <span className="weekHighlight">to</span>{format(parseISO(currOrder.lastDayOfWeek), "EEE '-' MMMM do yyyy")}
+                    </div>
                 </div>
                 
                 <div className="headerInnerWrapper"> 
@@ -124,7 +138,8 @@ function Cart({ showCart, setShowCart }) {
                         <ViewListIcon fontSize="large" /><span className="footerSpecial">{cart[0].length}</span>
                     </div>
                     <button className="completeButton" onClick={completeOrder}>
-                        <span>Complete Order</span>{loading ? <Loader isLoading={loading} size="1rem" thickness={1} /> : null}
+                        <span>Complete Order</span>
+                        {loading ? <Loader isLoading={loading} size="1rem" thickness={1} /> : null}
                     </button>
                 </div>
             </div>
