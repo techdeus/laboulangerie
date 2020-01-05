@@ -39,9 +39,7 @@ function Cart({ showCart, setShowCart }) {
     const completeOrder = async () => {
         const totalOrder = {
             products: cart[0],
-            store: appInfo[0].store,
-            user: appInfo[0].user,
-            order: appInfo[0].order,
+            order: currOrder,
             date: new Date(Date.now()),
         };
 
