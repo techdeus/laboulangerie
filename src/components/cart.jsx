@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Confirmation from './confirmation';
 import { InfoContext } from './store';
+import Loader from './loader';
 import '../stylesheets/components/cart.scss';
 import Axios from 'axios';
 import { IconButton } from '@material-ui/core';
@@ -13,6 +14,7 @@ function Cart({ showCart, setShowCart }) {
     const [ total, setTotal ] = useState(0.00);
     const [ error, setError ] = useState(false);
     const [ order, setOrder ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     const [ msg, setMsg ] = useState('');
     const { appInfo, cart } = useContext(InfoContext);
     const store = appInfo[0].store;
@@ -37,6 +39,7 @@ function Cart({ showCart, setShowCart }) {
     };
 
     const completeOrder = async () => {
+        setLoading(true);
         const totalOrder = {
             products: cart[0],
             order: currOrder,
@@ -48,6 +51,7 @@ function Cart({ showCart, setShowCart }) {
                 {
                     headers: { 'Authorization': "bearer " + token }
                 });
+            setLoading(false);
             // clear the shopping cart
             cart[1]([]);
             // clear the local cache
@@ -119,7 +123,9 @@ function Cart({ showCart, setShowCart }) {
                     <div className="innerFooterWrapper">
                         <ViewListIcon fontSize="large" /><span className="footerSpecial">{cart[0].length}</span>
                     </div>
-                    <button className="completeButton" onClick={completeOrder}>Complete Order</button>
+                    <button className="completeButton" onClick={completeOrder}>
+                        <span>Complete Order</span>{loading ? <Loader isLoading={loading} size="1rem" thickness={1} /> : null}
+                    </button>
                 </div>
             </div>
         )
