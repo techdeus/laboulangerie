@@ -54,7 +54,6 @@ function ChangePassword() {
         try {
             setLoading(true);
             let newPassword;
-            console.log(e.target.id);
             if (e.target.id === 'auto-create') {
                 newPassword = generatePassword(checkBox);
             } else {
