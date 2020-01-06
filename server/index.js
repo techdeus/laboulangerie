@@ -17,7 +17,7 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 app.post('/login/user', async (req, res) => {
     // Authenticate User
     try {
-        const { username, password } = req.body;
+        const { username, password, loginForever } = req.body;
         // get current Date
         const now = Date.now();
         // get week based on current date
@@ -47,7 +47,7 @@ app.post('/login/user', async (req, res) => {
                 currOrder = await orderModel.findOne({ where: { weekOfYear: currWeek.weekNum, store_id: user.store_id }});
             }
             const tokenUser = { username: username, password: password };
-            const accessToken = generateAccessToken(tokenUser);
+            const accessToken = generateAccessToken(tokenUser, loginForever);
             return res.status(200).json({ message: 'Logged In', user: user, store: store, order: currOrder, accessToken: accessToken });;
         } else {
             return res.status(400).send({ message: 'Login Failed' });
@@ -100,8 +100,10 @@ app.delete('/logout', (req, res) => {
     res.sendStatus(204);
 });
 
-function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '12h'});
+function generateAccessToken(user, loginForever) {
+    let expiration = loginForever ? '1y' : '12h';
+
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: expiration });
 }
 
 function authenticateToken(req, res, next) {
