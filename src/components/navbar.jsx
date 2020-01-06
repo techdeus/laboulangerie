@@ -111,7 +111,7 @@ function NavBar() {
                         <ListItemText primary="orders" />
                     </ListItem>
                     <Divider />
-                    <ListItem button key="change password" onClick={() => goLink("changepassword")}>
+                    <ListItem button key="change password" onClick={() => goLink("passwordchange")}>
                         <ListItemIcon><LockIcon /></ListItemIcon>
                         <ListItemText primary="change password" />
                     </ListItem>

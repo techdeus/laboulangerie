@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Home from './home';
 import Login from './login';
 import Error from './error';
+import ChangePassword from './changepassword';
 import NavBar from './navbar';
 import Footer from './footer';
 
@@ -21,7 +22,8 @@ function Routes() {
                 }
                 <Switch>
                     <Route exact path="/" component={Login} />
-                    <Route exact path="/home" component={Home}/>
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/passwordchange" component={ChangePassword} />
                     <Route component={Error} />
                 </Switch>
                 <Footer />
