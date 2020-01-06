@@ -10,6 +10,7 @@ function Login() {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ message, setMessage ] = useState('');
+    const [loginForever, setLoginForever] = useState(true);
     const [ error, setError ] = useState('');
     const [ loading, setLoading ] = useState(false);
     const { appInfo } = useContext(InfoContext);
@@ -28,6 +29,9 @@ function Login() {
             setPassword(e.target.value);
         }
     };
+    const stayLoginChange = (e) => {
+        setLoginForever((l) => !l);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,6 +40,7 @@ function Login() {
             const result = await Axios.post('/login/user', {
                 username: username.toLowerCase(),
                 password,
+                loginForever,
             })
             if (error) {
                 setError('');
@@ -77,6 +82,10 @@ function Login() {
                     className="inputBoxes"
                 >
                 </input>
+                <label htmlFor="isLogin">
+                    <input onChange={stayLoginChange} type="checkbox" id="isLogin" value={loginForever} checked={loginForever} />
+                    Stay Logged In
+                </label>
                 <button className="loginButton" onClick={handleSubmit}>
                     <span className="loginButtonText">Login</span> {loading ? <Loader isLoading={loading} size="1rem" thickness={1} /> : null}   
                 </button>
