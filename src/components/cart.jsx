@@ -108,6 +108,7 @@ function Cart({ showCart, setShowCart }) {
                     </div>
                 </div>
                 
+                
                 <div className="headerInnerWrapper"> 
                     <div className="cartItemNameHeader">Name</div>
                     <div className="cartItemPriceHeader">Per Item</div>
@@ -120,7 +121,9 @@ function Cart({ showCart, setShowCart }) {
                     <div className="cartItemQuantityHeader">Sun</div>
                     <div className="cartItemTotalQuantityHeader">Tot</div>
                     <div className="cartItemPriceHeader">Sub</div>
+                    <div className="cartItemPriceHeader hide">X</div>
                 </div>
+                
                 
                 {
                     cart[0].map((item) => (
@@ -161,7 +164,7 @@ function CartItem({ product, removeFromCart }) {
                 <div className="cartItemTotalQuantity">{product.totalQuantity}</div>
                 
                 <div className="cartItemPrice priceTotal">${(product.product.price * product.totalQuantity).toFixed(2)}</div>
-                <IconButton aria-label="delete" onClick={() => removeFromCart(product.product.id)}><DeleteIcon  className="deleteIcon" /></IconButton>
+                <IconButton className="deleteButton" aria-label="delete" onClick={() => removeFromCart(product.product.id)}><DeleteIcon  className="deleteIcon" /></IconButton>
             </div>
             <div className="cartItemCategory">({product.product.category})</div>
         </div>

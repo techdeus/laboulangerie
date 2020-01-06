@@ -78,7 +78,7 @@
         width: 100%;
         height: auto;
         font-size: 1.2rem;
-        color: #fff;
+        color: #000;
         background-color: transparent;
         padding: 10px;
         text-align: center;
@@ -103,44 +103,40 @@
 
 .headerInnerWrapper
 {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2fr 1fr 4em 4em 4em 4em 4em 4em 4em 6em 6em 2em;
     width: 100%;
     background: rgba(69, 63, 65, 0.6);
     border-radius: 3px;
+
+    .hide 
+    {
+        display: none;
+    }
 
     .cartItemNameHeader
     {
         font-size: 22px;
         padding: 10px;
         color: rgb(96, 96, 96);
-        min-width: 180px;
-        max-width: 180px;
     }
     .cartItemPriceHeader
     {
         font-size: 18px;
         font-style: italic;
         padding: 10px;
-        min-width: 100px;
-        max-width: 125px;
-        text-align: right;
-        margin-right: 0px;
     }
     .cartItemQuantityHeader
     {
         font-size: 18px;
         padding: 10px;
-        min-width: 80px;
-        text-align: right;   
     }
     .cartItemTotalQuantityHeader
     {
         @extend .cartItemQuantityHeader;
         font-weight: bold;
         color: $primarycolor;
+        text-align: center;
     }
     .cartItemPriceHeader
     {
@@ -161,11 +157,11 @@
     border-radius: 3px;
     padding: 5px;
     min-width: 100%;
+
     .cartInnerWrapper
     {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 2fr 1fr 4em 4em 4em 4em 4em 4em 4em 6em 6em 2em;
     }
 
     .cartItemName
@@ -173,19 +169,14 @@
         font-size: 22px;
         padding: 10px;
         color: rgb(96, 96, 96);
-        max-width: 140px;
         text-transform: capitalize;
     }
 
-    
     .cartItemPrice
     {
         font-size: 18px;
         font-style: italic;
         padding: 10px;
-        // max-width: 225px;
-        text-align: right;
-        margin-right: -25px;
     }
 
     .priceTotal
@@ -197,25 +188,29 @@
     .cartItemQuantity
     {
         font-size: 18px;
-        padding: 7px;
+        padding: 10px;
         color: tomato;
-        max-width: 10px;
-        text-align: right;
+        text-align: center;
     }
+
     .cartItemTotalQuantity
     {
         @extend .cartItemQuantity;
         font-weight: bold;
         color: $primarycolor;
-
-
     }
+
     .cartItemCategory
     {
         padding-left: 10px;
         color: rgb(160, 158, 158);
     }
-    
+
+    .deleteButton
+    {
+        position: relative!important;
+        top: -3px!important;
+    }
 }
 
 .cartFooterWrapper
