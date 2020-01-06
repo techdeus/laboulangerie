@@ -8,7 +8,7 @@ const { userModel, storeModel, productModel, orderModel } = require('./database/
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ngrok = require('ngrok');
-const { getWeekDates, addDays } = require('./util/date');
+const { getWeekDates, addDays, year } = require('./util/date');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -41,7 +41,7 @@ app.post('/login/user', async (req, res) => {
             let currOrder;
             if (superuser) {
                 store = await storeModel.findAll();
-                currOrder = await orderModel.findAll({ where: {weekOfYear: currWeek.weekNum }});
+                currOrder = await orderModel.findAll({ where: {weekOfYear: currWeek.weekNum, currYear: currWeek.year }});
             } else {
                 store = await storeModel.findByPk(user.store_id);
                 currOrder = await orderModel.findOne({ where: { weekOfYear: currWeek.weekNum, store_id: user.store_id }});
@@ -80,6 +80,20 @@ app.put('/updateOrder', authenticateToken, async (req, res) => {
     }
 });
 
+app.put('/changePassword', authenticateToken, async (req, res) => {
+    try {
+        const { newPassword, user } = req.body;
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const updatePassword = await userModel.update(
+            { password: hashedPassword },
+            { where: {id: user.id } }
+        );
+        const updateUser = await userModel.findOne( { where: { id: user.id }});
+        res.status(201).send({ user: updateUser, message: 'Password Changed'});
+    } catch (err) {
+        res.status(500).send({message: 'Something went wrong'});
+    }
+})
 app.delete('/logout', (req, res) => {
     const { token } = req.body;
     // remove the token from the database
