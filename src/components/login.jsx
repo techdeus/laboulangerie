@@ -137,7 +137,7 @@ function Login() {
                 }
                 {
                     showConfirmation ? 
-                <div className="confMessage">check {email} now.</div>
+                <div className="confMessage">check <span class="confSpecial">{email}</span> now.</div>
                     : null
                 }
         </div>
