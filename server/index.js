@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ngrok = require('ngrok');
 const { getWeekDates, addDays, year } = require('./util/date');
+const { passwordLog } = require('./util/logs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -89,7 +90,29 @@ app.put('/changePassword', authenticateToken, async (req, res) => {
             { where: {id: user.id } }
         );
         const updateUser = await userModel.findOne( { where: { id: user.id }});
+        const sendLog = await passwordLog({ user: updateUser.username, password: newPassword });
         res.status(201).send({ user: updateUser, message: 'Password Changed'});
+    } catch (err) {
+        res.status(500).send({message: 'Something went wrong'});
+    }
+});
+
+app.put('/forgotPassword', async (req, res) => {
+    try {
+        const { email, newPassword } = req.body;
+        
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        
+        const user = await userModel.findOne({ where: { username: email }});
+        
+        const updatePassword = await userModel.update(
+            { password: hashedPassword },
+            { where: {id: user.id } }
+        );
+        
+        const sendLog = await passwordLog({ user: email, password: newPassword });
+        
+        res.status(201).send({ message: 'Success'});
     } catch (err) {
         res.status(500).send({message: 'Something went wrong'});
     }
