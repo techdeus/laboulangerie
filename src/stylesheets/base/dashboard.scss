@@ -6,10 +6,10 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    min-height: 75vh;
+    min-height: 68vh;
     background-color: #ffffff99;
     @include breakpoint(medium) {
-        min-height: 68vh;
+        min-height: 75vh;
     }
 }
 

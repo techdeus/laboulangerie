@@ -2,7 +2,7 @@ import React, { Fragment, useState, useContext } from 'react';
 import { InfoContext } from './store';
 import Cart from './cart';
 import { useHistory } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Switch, FormControlLabel, FormControl, Typography, Drawer, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Switch, FormControlLabel, FormControl, Typography, Drawer, Divider, List, ListItem, ListItemIcon, ListItemText, ClickAwayListener } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -72,6 +72,7 @@ function NavBar() {
 
     return (
         <Fragment>
+            <ClickAwayListener onTouchEnd={handleDrawerClose} onClickAway={handleDrawerClose}>
             <AppBar className={classes.appBar}>
                 <Cart showCart={showCart} setShowCart={setShowCart} />
                 <Toolbar className="navtoolbar">
@@ -95,11 +96,13 @@ function NavBar() {
                     </IconButton>
                 </Toolbar>
             </AppBar>
+            </ClickAwayListener>
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
                 anchor="left"
                 open={open}
+                docked={false}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
