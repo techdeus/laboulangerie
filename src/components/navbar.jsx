@@ -54,8 +54,12 @@ function NavBar() {
     };
 
     const viewCart = () => {
-        setShowCart(prevState => !prevState);
-        return;
+        if (user.superuser) {
+            return;
+        } else {
+            setShowCart(prevState => !prevState);
+            return;
+        }
     };
 
     const handleDrawerOpen = () => {
@@ -76,7 +80,13 @@ function NavBar() {
                     </IconButton>
                     <Typography noWrap variant="h6" className="navContent navStore">Store: { user.superuser ? "Super User" : store.name} </Typography>
                     <Typography noWrap variant="h6" className="navUser">User: {user.username} </Typography>
-                    <Typography noWrap variant="h6" className="navContent navOpenCart" onClick={viewCart}>Items in Cart: {cart[0].length}</Typography>
+                    {
+                        user.superuser ? 
+                            <Typography noWrap variant="h6" className="navContent navOpenCart" onClick={viewCart}>No Cart Available</Typography> 
+                            :
+                            <Typography noWrap variant="h6" className="navContent navOpenCart" onClick={viewCart}>Items in Cart: {cart[0].length}</Typography>
+                    }
+                    
                     <IconButton edge="end">
                         <FormControlLabel
                             control={<Switch color="secondary" checked={isLoggedIn} aria-label="login switch" onChange={logout} />}
