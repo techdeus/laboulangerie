@@ -72,7 +72,7 @@ function NavBar() {
 
     return (
         <Fragment>
-            <ClickAwayListener onTouchEnd={handleDrawerClose} onClickAway={handleDrawerClose}>
+            <ClickAwayListener onClickAway={handleDrawerClose}>
             <AppBar className={classes.appBar}>
                 <Cart showCart={showCart} setShowCart={setShowCart} />
                 <Toolbar className="navtoolbar">
@@ -102,7 +102,6 @@ function NavBar() {
                 variant="persistent"
                 anchor="left"
                 open={open}
-                docked={false}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
