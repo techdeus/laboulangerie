@@ -139,7 +139,7 @@ function readData(filename) {
 // })
 // .catch(err => console.error(err));
 
-
+// user[store]
 const mapStoreUser = {
     1: 2,
     2: 3,
@@ -147,7 +147,7 @@ const mapStoreUser = {
     4: 5,
     5: 6,
     6: 7,
-    9: 1,
+    8: 1,
     7: 8
 };
 
@@ -161,7 +161,7 @@ const seedOrders = async () => {
             let weekNum = getWeek(date, {weekStartsOn: 1});
             let year = getYear(date);
             for (let j = 1; j <= 9; ++j) {
-                if (j === 8) continue;
+                if (j === 9) continue;
                 const newOrder = orderModel.create({
                     weekOfYear: weekNum,
                     currYear: year,
