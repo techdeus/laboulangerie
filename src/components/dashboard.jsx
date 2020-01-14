@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Loader from './loader';
 import '../stylesheets/base/dashboard.scss';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 function Dashboard() {
     const [loading, setLoading] = useState(true);
@@ -34,7 +36,11 @@ function Dashboard() {
                     <div key={index} className="dashitemWrapper" role="button" onClick={() => goLink(`${item}`)}>
                         <div className="dash-name">{item}</div>
                         <div className="dash-metric">{item.length}</div>
-                        <div className="dash-circle"><img className="dash-image" src={`/img/assets/dash-${item}.svg`} /></div>
+                        <div className="dash-circle">
+                            {
+                                item === 'products' ? <ViewListIcon className="dash-image" /> : <ListAltIcon className="dash-image" />
+                            }
+                        </div>
                         <div className="dash-view">view</div>
                     </div>
                 ))
