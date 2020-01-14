@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "cp example.env .env && echo 'Add Variables into .env file!'",
     "react-dev": "webpack --watch",
-    "start": "nodemon server/index.js --watch"
+    "start": "nodemon server/index.js --watch",
+    "grunt": "grunt --verbose s3"
   },
   "author": "Marlon Sullivan & Ghazaleh Shameli",
   "license": "ISC",
@@ -38,6 +39,9 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "css-loader": "^3.2.1",
     "file-loader": "^5.0.2",
+    "grunt": "^1.0.4",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-s3": "^0.2.0-alpha.3",
     "ngrok": "^3.2.5",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
