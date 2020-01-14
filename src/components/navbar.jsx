@@ -11,6 +11,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import '../stylesheets/components/navbar.scss';
 
 const drawerWidth = 240;
@@ -118,8 +119,12 @@ function NavBar() {
                         <ListItemIcon><HomeIcon /></ListItemIcon>
                         <ListItemText primary="home" />
                     </ListItem>
-                    <ListItem button key="orders" onClick={() => goLink("orders")}>
+                    <ListItem button key="products" onClick={() => goLink("products")}>
                         <ListItemIcon><ViewListIcon /></ListItemIcon>
+                        <ListItemText primary="products" />
+                    </ListItem>
+                    <ListItem button key="orders" onClick={() => goLink("orders")}>
+                        <ListItemIcon><ListAltIcon /></ListItemIcon>
                         <ListItemText primary="orders" />
                     </ListItem>
                     <Divider />
