@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Loader from './loader';
+import { InfoContext } from './store';
 import '../stylesheets/base/dashboard.scss';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -9,16 +10,24 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState(['products', 'orders']);
-    const [orders, setOrders] = useState([]);
-    const [products, setProducts] = useState([]);
+    const [orders, setOrders] = useState('');
+    const [products, setProducts] = useState('');
     const [error, setError] = useState('');
     const history = useHistory();
-
+    const { appInfo } = useContext(InfoContext);
+    
     useEffect(() => {
-        Axios.get('/dashboard')
+        const token = appInfo[0].accessToken;
+        
+        const storeID = appInfo[0].store.id;
+        
+        Axios.post('/dashboard',  
+            {store_id: storeID},
+            {headers: { 'Authorization': "bearer " + token }}
+        )
             .then((res) => {
-                setOrders(res.data.orders);
-                setProducts(res.data.products);
+                setOrders(res.data.ordersLength);
+                setProducts(res.data.productsLength);
                 setLoading(false);
             })
                 .catch(err => setError(err.data.response.message));
@@ -35,7 +44,7 @@ function Dashboard() {
                 items.map((item, index) => (
                     <div key={index} className="dashitemWrapper" role="button" onClick={() => goLink(`${item}`)}>
                         <div className="dash-name">{item}</div>
-                        <div className="dash-metric">{item.length}</div>
+                        <div className="dash-metric">{item === 'orders' ? orders : products}</div>
                         <div className="dash-circle">
                             {
                                 item === 'products' ? <ViewListIcon className="dash-image" /> : <ListAltIcon className="dash-image" />

@@ -123,6 +123,22 @@ app.delete('/logout', (req, res) => {
     res.sendStatus(204);
 });
 
+
+app.post('/dashboard', authenticateToken, async (req, res) => {
+    const { store_id } = req.body;
+    
+    let orders;
+    if (store_id !== undefined) {
+        orders = await orderModel.findAll({ where: { store_id: store_id, isOrdered: true }});
+    } else {
+        // handle super user
+        orders = await orderModel.findAll({ where: { isOrdered: true }});
+    }
+    
+    const products = await productModel.findAll({ where: { isactive: true }});
+    res.status(201).send({ ordersLength: orders.length, productsLength: products.length });
+});
+
 function generateAccessToken(user, loginForever) {
     let expiration = loginForever ? '1y' : '12h';
 
@@ -151,6 +167,7 @@ app.get('/*', (req, res) => {
         }
     });
 });
+
 
 
 app.listen(process.env.PORT, () => {
