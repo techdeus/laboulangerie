@@ -9,7 +9,7 @@ function Confirmation({ msg, setShowCart, setOrder }) {
         const redirect = setTimeout(() => {
             setShowCart(false);
             setOrder(false);
-            window.location.reload(true);
+            history.push('/');
         }, 5000);
         return () => {
             clearTimeout(redirect);
