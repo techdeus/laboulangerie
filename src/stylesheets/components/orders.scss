@@ -1,0 +1,205 @@
+@import 'src/stylesheets/base/master.scss';
+
+.orderWrapper
+{
+    min-height: 90vh;
+    width: 100vw;
+}
+
+.orderTitle
+{
+    font-size: 3rem;
+    color: $cupcolor;
+    padding: 20px 10px 10px 20px;
+    margin-top: 25px;
+}
+
+.orderContainer
+{
+    padding: 20px;
+}
+
+.showOrderContainer
+{
+    display: flex;
+    cursor: pointer;
+    padding: 20px 25px;
+    width: 50%;
+
+    .showOrderWeek
+    {
+        margin: 0 10px 0 10px;
+    }
+
+    .showOrderDate
+    {
+        
+        margin: 0 10px 0 10px;
+    }
+
+    .showOrderWeek, .showOrderDate, .showOrderDash
+    {
+        font-size: 1.5rem;
+        &:hover
+        {
+            color: $cupcolor;
+        }
+    }
+
+    &:hover
+    {
+        color: $cupcolor;
+    }
+}
+
+.showOrderOptions
+{
+    display: flex;
+    padding: 20px 50px;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 75px;
+    .dateOrdered
+    {
+        font-size: 1.2rem;
+        span
+        {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    }
+
+    .totalPriceOrdered
+    {
+        font-size: 1.2rem;
+        span
+        {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    }
+
+    .orderEditIcon
+    {
+        padding: 10px;
+        cursor: pointer;
+        &:hover
+        {
+            color: #fff;
+            background-color: $cupcolor;
+            border-radius: 50%;
+        }
+    }
+
+    .orderUpdateIcon
+    {
+        padding: 10px;
+        cursor: pointer;
+        &:hover
+        {
+            color: #fff;
+            background-color: $cupcolor;
+            border-radius: 50%;
+        }
+    }
+
+    .highlightFab
+    {
+        background-color: $primaryoffcolor;
+    }
+    .highlightEdit
+    {
+        background-color: $secondarycolor;
+    }
+}
+
+.arrowUp
+{
+    border: solid;
+    border-color: $secondarycolor;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    margin: -7px 10px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(-135deg);
+    transition: all 500ms;
+}
+
+.arrowDown
+{
+    border: solid;
+    border-color: $secondarycolor;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    margin: -7px 10px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transition: all 500ms;
+}
+
+.subTitle
+{
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 25px;
+    text-transform: capitalize;
+}
+
+.divider
+{
+    width: 50%!important;
+}
+
+.showOrderProductsContainer
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+    .showOrderProductsHeader
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-bottom: 25px;
+        width: 50%;
+
+        .orderTotalQuantity
+        {
+            font-size: 1.8rem;
+        }
+    }
+    .showOrderProductsFooter
+    {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-gap: 10px;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+    }
+}
+
+.updateOrderSuccessMessage
+{
+    text-align: center;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    color: green;
+}
+
+.orderDynamicOptions
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}

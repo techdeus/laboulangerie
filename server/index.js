@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 8282;
-const { userModel, storeModel, productModel, orderModel } = require('./database/models');
+const { userModel, storeModel, productModel, orderModel, Op } = require('./database/models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ngrok = require('ngrok');
@@ -70,12 +70,16 @@ app.get('/allproducts', authenticateToken, async (req, res) => {
 app.put('/updateOrder', authenticateToken, async (req, res) => {
     try {
         const { products, date, order } = req.body;
+        
         const jsonProd = JSON.stringify(products);
+        
         const updateOrder = await orderModel.update(
             { date: date, products: jsonProd, isOrdered: true },
             { where: { id: order.id }}
         );
-        res.status(200).send({updateOrder, msg: 'Order Complete'});
+        
+        const updatedOrder = await orderModel.findOne( { where: { id: order.id }});
+        res.status(201).send({updatedOrder, msg: 'Order Complete'});
     } catch (err) {
         res.status(500).send({message: 'Something went wrong'});
     }
@@ -138,6 +142,31 @@ app.post('/dashboard', authenticateToken, async (req, res) => {
     const products = await productModel.findAll({ where: { isactive: true }});
     res.status(201).send({ ordersLength: orders.length, productsLength: products.length });
 });
+
+app.post('/allOrders', authenticateToken, async (req, res) => {
+    try {
+        const { store_id, super_user } = req.body;
+        
+        const date = Date.now();
+        const { weekNum } = getWeekDates(date);
+        
+        let orders;
+        if (super_user) {
+            orders = await orderModel.findAll({ where: { isOrdered: true, weekOfYear: {
+                [Op.lte]: weekNum
+            }}});
+        } else {
+            orders = await orderModel.findAll({ where: { store_id: store_id, isOrdered: true, weekOfYear: {
+                [Op.lte]: weekNum
+            }}});
+        }
+        
+        res.status(201).send({ orders: orders});
+
+    } catch (err) {
+        res.status(401).send({message: 'Something went Wrong'});
+    }
+})
 
 function generateAccessToken(user, loginForever) {
     let expiration = loginForever ? '1y' : '12h';

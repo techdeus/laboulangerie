@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const DB = require('./index');
-
+const Op = Sequelize.Op;
 const storeModel = DB.define('stores', {
     id: {
         type: Sequelize.INTEGER,
@@ -159,4 +159,5 @@ module.exports = {
     userModel,
     productModel,
     orderModel,
+    Op,
 };

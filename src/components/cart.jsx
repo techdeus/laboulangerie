@@ -53,14 +53,19 @@ function Cart({ showCart, setShowCart }) {
                     headers: { 'Authorization': "bearer " + token }
                 });
             setLoading(false);
-            // clear the shopping cart
-            cart[1]([]);
-            // clear the local cache
-            window.localStorage.removeItem('cart');
-            // set the message from server
-            setMsg(results.data.msg);
-            // order is complete - will render confirmation page
-            setOrder(true);
+            if (results.data.msg) {
+                // clear the shopping cart
+                cart[1]([]);
+                // clear the local cache
+                window.localStorage.removeItem('cart');
+                const currStorage = JSON.parse(window.localStorage.getItem('data'));
+                const updateStorage = {...currStorage, order: results.data.updatedOrder };
+                window.localStorage.setItem('data', JSON.stringify(updateStorage));
+                // set the message from server
+                setMsg(results.data.msg);
+                // order is complete - will render confirmation page
+                setOrder(true);
+            }
         } catch (err) {
             setError(err.response.data.message);
         }
