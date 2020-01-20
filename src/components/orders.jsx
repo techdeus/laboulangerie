@@ -41,8 +41,8 @@ function Orders() {
             <h1 className="orderTitle">Upcoming Order</h1>
                 {
                     user.superuser ? currOrder.map((storeOrder) => (
-                        <Order order={storeOrder} defaultShowOrder={false} canEditOrder={true} />
-                        )) : <Order order={currOrder} defaultShowOrder={false} canEditOrder={true} />
+                        <Order key={storeOrder.id} order={storeOrder} defaultShowOrder={false} canEditOrder={true} />
+                        )) : <Order order={currOrder} defaultShowOrder={true} canEditOrder={true} />
                 }
             <h1 className="orderTitle">Previous Orders</h1>
                 {

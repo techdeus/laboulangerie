@@ -10,17 +10,21 @@ import UpdateIcon from '@material-ui/icons/Update';
 import Axios from 'axios';
 
 function Order({ order, defaultShowOrder, canEditOrder }) {
-    const [products, setProducts] = useState(JSON.parse(order.products))
+    const [products, setProducts] = useState(JSON.parse(order.products) || []);
     const [editOrder, setEditOrder] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showOrder, setShowOrder] = useState(defaultShowOrder);
+    const [storeInfo, setStoreInfo] = useState(null);
+    console.log(storeInfo);
     const [total, setTotal] = useState(0.00);
     const { appInfo } = useContext(InfoContext);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [madeChanges, setMadeChanges] = useState(false);
     const history = useHistory();
-
+    const user = appInfo[0].user;
+    const store = appInfo[0].store;
+    
     useEffect(() => {
         let subTotal = parseFloat(0.00);
         products.forEach(({ product, totalQuantity }) => {
@@ -30,6 +34,14 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
         setTotal(subTotal.toFixed(2));
     }, [products]);
 
+    useEffect(() => {
+        if (user.superuser) {
+            const findStore = store.find((eachStore) => {
+                return eachStore.id === order.store_id;
+            });
+            setStoreInfo(findStore);
+        }
+    }, []);
     const toggleEditOrder = () => {
         if (!canEditOrder) return;
         setEditOrder(prevState => !prevState);
@@ -116,8 +128,16 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
 
     if (!order.isOrdered) {
         return (
-            <div class="orderTitle">
-                You have not placed a order for this week!
+            <div className="orderContainer">
+                <div className="showOrderContainer">
+                    {user.superuser && storeInfo 
+                        ? 
+                            <div className="showOrderStoreName">{storeInfo.name}: no order placed this week!</div> 
+                        : 
+                            <div>You have not placed a order for this week!</div>
+                    }
+                    
+                </div>
             </div>
         )
     }
@@ -125,6 +145,7 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
     return (
         <div className="orderContainer">    
             <div className="showOrderContainer" role="button" onClick={() => setShowOrder(prevState => !prevState)}>
+                {user.superuser && storeInfo ? <div className="showOrderStoreName">Store: {storeInfo.name}</div> : null}
                 <div className="showOrderWeek">Week: {order.weekOfYear}</div>
                 <div className="showOrderDate">{format(Date.parse(order.begDayOfWeek), 'MM/dd/yyyy')}</div>
                 <span className="showOrderDash">-</span>
