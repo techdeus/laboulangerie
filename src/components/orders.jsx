@@ -7,7 +7,6 @@ import Axios from 'axios';
 
 function Orders() {
     const [orders, setOrders] = useState([]);
-    console.log(orders);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const { appInfo } = useContext(InfoContext);
@@ -27,7 +26,6 @@ function Orders() {
             { headers: { 'Authorization': "bearer " + token } }
         ) 
             .then((res) => {
-                console.log(res.data.orders);
                 setOrders(res.data.orders);
                 setLoading(false);
             })

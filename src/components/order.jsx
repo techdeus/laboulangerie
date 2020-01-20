@@ -41,6 +41,7 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
             setStoreInfo(findStore);
         }
     }, []);
+
     const toggleEditOrder = () => {
         if (!canEditOrder) return;
         setEditOrder(prevState => !prevState);
@@ -51,6 +52,7 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
             setEditOrder(false);
             setMessage('');
             setShowOrder(false);
+            setMadeChanges(false);
             history.push('/');
         }, 5000);
         return () => {
@@ -90,38 +92,53 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
         setProducts([...updatedProducts]);
     };
 
-    const processOrder = async (e) => {
-        if (!madeChanges) {
-            setMessage('You have not updated the Order');
-            return;
-        }
-        e.preventDefault();
-        if (message) setMessage('');
-        const token = appInfo[0].accessToken;
-        setLoading(true);
-        const totalOrder = {
-            products: products,
-            order: order,
-            date: new Date(Date.now()),
-        };
+    const checkChange = () => {
+        return new Promise((resolve, reject) => { 
+            if (madeChanges) {
+                resolve(true);
+            } else {
+                reject({ data: {message: 'You have not updated the Order'} });
+            }
+        });
+    };
 
+    const processOrder = async (e) => {
+        e.preventDefault();
+        
         try {
-            const results = await Axios.put('/updateOrder', totalOrder, 
-                {
-                    headers: { 'Authorization': "bearer " + token }
-                });
+            const shouldContinue = await checkChange();
             
-            if (results.data.msg) {
-                const currStorage = JSON.parse(window.localStorage.getItem('data'));
-                const updateStorage = {...currStorage, order: results.data.updatedOrder };
-                window.localStorage.setItem('data', JSON.stringify(updateStorage));
-                setLoading(false);
-                // set the message from server
-                setMessage(results.data.msg);
-                postUpdateOrder();
+            if (shouldContinue) {
+                if (message) setMessage('');
+                if (error) setError('');
+                const token = appInfo[0].accessToken;
+                setLoading(true);
+                const totalOrder = {
+                    products: products,
+                    order: order,
+                    date: new Date(Date.now()),
+                };
+                const results = await Axios.put('/updateOrder', totalOrder, 
+                    {
+                        headers: { 'Authorization': "bearer " + token }
+                    });
+                
+                if (results.data.msg) {
+                    const currStorage = JSON.parse(window.localStorage.getItem('data'));
+                    const updateStorage = {...currStorage, order: results.data.updatedOrder };
+                    window.localStorage.setItem('data', JSON.stringify(updateStorage));
+                    setLoading(false);
+                    // set the message from server
+                    setMessage(results.data.msg);
+                    postUpdateOrder();
+                }
             }
         } catch (err) {
-            setError(err.response.data.message);
+            if (err.data) {
+                setError(err.data.message);
+            } else {
+                setError(err.response.data.message);
+            }
         }
     };
 
@@ -133,7 +150,7 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
                         ? 
                             <div className="showOrderStoreName">{storeInfo.name}: no order placed this week!</div> 
                         : 
-                            <div>You have not placed a order for this week!</div>
+                            <div className="showOrderStoreName">You have not placed a order for this week!</div>
                     }
                     
                 </div>
