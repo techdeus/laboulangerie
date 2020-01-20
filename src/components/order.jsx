@@ -15,7 +15,6 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
     const [loading, setLoading] = useState(false);
     const [showOrder, setShowOrder] = useState(defaultShowOrder);
     const [storeInfo, setStoreInfo] = useState(null);
-    console.log(storeInfo);
     const [total, setTotal] = useState(0.00);
     const { appInfo } = useContext(InfoContext);
     const [message, setMessage] = useState('');

@@ -7,6 +7,7 @@ import Axios from 'axios';
 
 function Orders() {
     const [orders, setOrders] = useState([]);
+    console.log(orders);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const { appInfo } = useContext(InfoContext);
@@ -26,6 +27,7 @@ function Orders() {
             { headers: { 'Authorization': "bearer " + token } }
         ) 
             .then((res) => {
+                console.log(res.data.orders);
                 setOrders(res.data.orders);
                 setLoading(false);
             })
@@ -46,16 +48,13 @@ function Orders() {
                 }
             <h1 className="orderTitle">Previous Orders</h1>
                 {
-                    orders ? 
-                        <div className="subTitle">you have no previous orders</div> 
-                    : 
-                        orders.map((order, index) => {
-                            if (index === 0) {
-                                null;
-                            } else {
-                                <Order order={order} defaultShowOrder={false} canEditOrder={false} />
-                            }
-                    })
+                    orders
+                        ? orders.map((order, index) => {
+                            if (order.id === currOrder.id) return null;
+                            return <Order key={order.id} order={order} defaultShowOrder={false} canEditOrder={false} />
+                        }) 
+                        : 
+                            <div className="subTitle">you have no previous orders</div>
                 }
             <div className="orderDynamicOptions">
                 {

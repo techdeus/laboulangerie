@@ -159,6 +159,7 @@ app.post('/allOrders', authenticateToken, async (req, res) => {
             orders = await orderModel.findAll({ where: { store_id: store_id, isOrdered: true, weekOfYear: {
                 [Op.lte]: weekNum
             }}});
+            // console.log(orders);
         }
         
         res.status(201).send({ orders: orders});
