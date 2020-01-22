@@ -143,7 +143,7 @@ function Cart({ showCart, setShowCart }) {
                         <ViewListIcon fontSize="large" /><span className="footerSpecial">{cart[0].length}</span>
                     </div>
                     <button className="completeButton" onClick={completeOrder}>
-                        <span>Complete Order</span>
+                        {currOrder.isOrdered ? <span>Update Order</span> : <span>Complete Order</span>}
                         {loading ? <Loader isLoading={loading} size="1rem" thickness={1} /> : null}
                     </button>
                 </div>

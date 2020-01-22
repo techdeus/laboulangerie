@@ -15,12 +15,13 @@ function Dashboard() {
     const [error, setError] = useState('');
     const history = useHistory();
     const { appInfo } = useContext(InfoContext);
+    const { cart } = useContext(InfoContext);
+    const currOrder = appInfo[0].order;
     
     useEffect(() => {
         const token = appInfo[0].accessToken;
-        
         const storeID = appInfo[0].store.id;
-        
+
         Axios.post('/dashboard',  
             {store_id: storeID},
             {headers: { 'Authorization': "bearer " + token }}
@@ -28,6 +29,7 @@ function Dashboard() {
             .then((res) => {
                 setOrders(res.data.ordersLength);
                 setProducts(res.data.productsLength);
+                updateCart();
                 setLoading(false);
             })
                 .catch(err => setError(err.data.response.message));
@@ -36,6 +38,15 @@ function Dashboard() {
 
     const goLink = (url) => {
         return history.push(`/${url}`);
+    };
+
+    const updateCart = () => {
+        let orderProducts;
+        if (currOrder.isOrdered && cart[0].length === 0) {
+            orderProducts = JSON.parse(currOrder.products);
+            cart[1](orderProducts);
+            window.localStorage.setItem('cart', JSON.stringify(orderProducts));
+        }
     };
 
     return (
