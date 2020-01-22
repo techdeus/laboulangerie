@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import '../stylesheets/components/orders.scss';
 import Order from './order';
 import { InfoContext } from './store';
@@ -13,6 +14,10 @@ function Orders() {
     const currOrder = appInfo[0].order;
     const store = appInfo[0].store;
     const user = appInfo[0].user;
+
+    if (appInfo[0]['message'] !== "Logged In") {
+        return <Redirect to='/' />;
+    }
 
     useEffect(() => {
         setLoading(true);

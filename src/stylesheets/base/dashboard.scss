@@ -96,3 +96,66 @@
         margin-top: auto;
     }
 }
+
+.repeatOrderModal
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff44;
+    
+    .modalContainer
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: auto;
+        height: 300px;
+        padding: 50px;
+        outline: none;
+        background: rgba(255, 255, 255, 0.904);
+        border-radius: 10px;
+        box-shadow: 0 0 10px 10px #ffffff44;
+    }
+
+    .modalTitle
+    {
+        text-transform: capitalize;
+        font-size: 2rem;
+        color: #000;
+        padding: 10px;
+    }
+
+    .modalBottomContainer
+    {
+        display: flex;
+    }
+
+    .modalButton
+    {
+        margin: 25px;
+        width: 200px;
+        height: 50px;
+        padding: 10px 0px;
+        color: $secondarycolor;
+        background: #fff;
+        border: 2px solid $primarycolor;
+        outline: none;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        text-transform: capitalize;
+
+        &:hover {
+            background: $primarycolor;
+            border: none;
+            font-weight: bold;
+        }
+    }
+    .primary
+    {
+        background: $primarycolor;
+    }
+}

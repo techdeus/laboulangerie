@@ -129,7 +129,15 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
                 
                 if (results.data.msg) {
                     const currStorage = JSON.parse(window.localStorage.getItem('data'));
-                    const updateStorage = {...currStorage, order: results.data.updatedOrder };
+                    let updateStorage;
+                    if (user.superuser) {
+                        let findOrderIndex = appInfo[0].order.findIndex((currOrder) => currOrder.id === order.id);
+                        let updatedOrders = [...appInfo[0].order];
+                        updatedOrders[findOrderIndex] = results.data.updatedOrder;
+                        updateStorage = {...currStorage, order: updatedOrders };
+                    } else {
+                        updateStorage = {...currStorage, order: results.data.updatedOrder };
+                    }
                     window.localStorage.setItem('data', JSON.stringify(updateStorage));
                     setLoading(false);
                     // set the message from server
