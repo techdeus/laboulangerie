@@ -152,8 +152,9 @@
 .subTitle
 {
     font-size: 1.4rem;
-    text-align: center;
-    padding: 25px;
+    margin: 0 10px 0 10px;
+    text-align: left;
+    padding: 25px 45px;
     text-transform: capitalize;
 }
 
@@ -209,4 +210,31 @@
     justify-content: center;
     align-items: center;
     margin: 10px 0px;
+}
+
+.placeOrder
+{
+    margin: 25px auto;
+    width: 200px;
+    height: 50px;
+    padding: 10px;
+    color: $secondarycolor;
+    background: #fff;
+    border: 2px solid $primarycolor;
+    outline: none;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    text-transform: capitalize;
+    &:hover {
+        background: $primarycolor;
+        border: none;
+    }
+}
+
+.addFlex
+{
+    flex-direction: column;
 }

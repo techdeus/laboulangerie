@@ -9,6 +9,7 @@ $cupcolor: #3a3f42;
 $cardcolor: #372d2b;
 $primaryFont: 'Roboto', sans-serif;
 $secondaryFont: 'Girassol', cursive;
+$errorColor: #c51244;
 
 $breakpoints: (
     medium: 43.75em,
@@ -63,7 +64,7 @@ a
 
 .error
 {
-    color: $texttitlecolor;
+    color: $errorColor;
     font-size: 1rem;
     font-style: italic;
     margin: 10px 0;

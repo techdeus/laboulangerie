@@ -97,7 +97,11 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
             if (madeChanges) {
                 resolve(true);
             } else {
-                reject({ data: {message: 'You have not updated the Order'} });
+                if (!canEditOrder) {
+                    reject({ data: {message: 'You cannot update this Order'} });
+                } else {
+                    reject({ data: {message: 'You have not updated the Order'} });
+                }
             }
         });
     };
@@ -145,12 +149,16 @@ function Order({ order, defaultShowOrder, canEditOrder }) {
     if (!order.isOrdered) {
         return (
             <div className="orderContainer">
-                <div className="showOrderContainer">
-                    {user.superuser && storeInfo 
+                <div className="showOrderContainer addFlex">
+                    {
+                        user.superuser && storeInfo
                         ? 
                             <div className="showOrderStoreName">{storeInfo.name}: no order placed this week!</div> 
                         : 
-                            <div className="showOrderStoreName">You have not placed a order for this week!</div>
+                            <>
+                                <div className="showOrderStoreName">You have not placed a order for this week!</div>
+                                <button className="placeOrder" onClick={() => history.push('/products')}>place order now</button>
+                            </>
                     }
                     
                 </div>

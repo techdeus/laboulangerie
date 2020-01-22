@@ -29,7 +29,6 @@ function Orders() {
                 setOrders(res.data.orders);
                 setLoading(false);
             })
-                
                 .catch(err => {
                     setLoading(false);
                     setError(err.response.data.message)
@@ -46,13 +45,13 @@ function Orders() {
                 }
             <h1 className="orderTitle">Previous Orders</h1>
                 {
-                    orders
+                    orders.length > 0
                         ? orders.map((order, index) => {
                             if (order.id === currOrder.id) return null;
                             return <Order key={order.id} order={order} defaultShowOrder={false} canEditOrder={false} />
                         }) 
                         : 
-                            <div className="subTitle">you have no previous orders</div>
+                            <div className="subTitle">you have no previous orders!</div>
                 }
             <div className="orderDynamicOptions">
                 {
